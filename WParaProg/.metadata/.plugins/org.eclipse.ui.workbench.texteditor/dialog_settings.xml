@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="isRegEx" value="false"/>
+		<item key="casesensitive" value="false"/>
+		<item key="incremental" value="false"/>
+		<item key="wrap" value="true"/>
+		<item key="wholeword" value="false"/>
+		<item key="selection" value="&gt;&gt;&gt;"/>
+		<list key="findhistory">
+			<item value="&gt;&gt;&gt;"/>
+			<item value="&#x0A;&#x09;&#x09;// Treat log type&#x0A;&#x09;&#x09;switch(nextLog.getType())&#x0A;&#x09;&#x09;&#x09;{&#x0A;&#x09;&#x09;&#x09;/*&#x0A;&#x09;&#x09;&#x09; * ---------------------------------------------------&#x0A;&#x09;&#x09;&#x09; * done : Affichage du prochain log sur l&apos;UI / console&#x0A;&#x09;&#x09;&#x09; *&#x0A;&#x09;&#x09;&#x09; * Remarque : -&#x0A;&#x09;&#x09;&#x09; * ---------------------------------------------------&#x0A;&#x09;&#x09;&#x09; */&#x0A;&#x09;&#x09;&#x09;case WAITING:&#x0A;&#x09;&#x09;&#x09;&#x09;/*&#x0A;&#x09;&#x09;&#x09;&#x09; * ---------------------------------------------------------------------------------&#x0A;&#x09;&#x09;&#x09;&#x09; * done : Gestion d&apos;un log indiquant l&apos;attente d&apos;un thread sur sa ressource partagee&#x0A;&#x09;&#x09;&#x09;&#x09; *&#x0A;&#x09;&#x09;&#x09;&#x09; * Remarque : cette etape consiste a gerer vos lites d&apos;attentes&#x0A;&#x09;&#x09;&#x09;&#x09; * ---------------------------------------------------------------------------------&#x0A;&#x09;&#x09;&#x09;&#x09; */&#x0A;&#x09;&#x09;&#x09;&#x09;System.out.println(&quot;\tThread (&quot; + nextLog.getPerson().getName() + &quot;) is waiting to access the document&quot;);&#x0A;&#x0A;&#x09;&#x09;&#x09;&#x09;break;&#x0A;&#x09;&#x09;&#x09;case PROCESSING:&#x0A;&#x09;&#x09;&#x09;&#x09;/*&#x0A;&#x09;&#x09;&#x09;&#x09; * -----------------------------------------------------------------------------&#x0A;&#x09;&#x09;&#x09;&#x09; * done : Gestion d&apos;un log indiquant l&apos;acces d&apos;un thread a sa ressource partagee&#x0A;&#x09;&#x09;&#x09;&#x09; *&#x0A;&#x09;&#x09;&#x09;&#x09; * Remarque : cette etape consiste a gerer vos lites d&apos;attentes&#x0A;&#x09;&#x09;&#x09;&#x09; * -----------------------------------------------------------------------------&#x0A;&#x09;&#x09;&#x09;&#x09; */&#x0A;&#x09;&#x09;&#x09;&#x09;System.out.println(&quot;\tThread (&quot; + nextLog.getPerson().getName() + &quot;) is processing the document&quot;);&#x0A;&#x0A;&#x09;&#x09;&#x09;&#x09;break;&#x0A;&#x09;&#x09;&#x09;case FINISHED:&#x0A;&#x09;&#x09;&#x09;&#x09;/*&#x0A;&#x09;&#x09;&#x09;&#x09; * -----------------------------------------------------------------------------------------------&#x0A;&#x09;&#x09;&#x09;&#x09; * done : Gestion d&apos;un log indiquant la fin d&apos;un thread et la liberation de l&apos;acces a sa ressource&#x0A;&#x09;&#x09;&#x09;&#x09; *&#x0A;&#x09;&#x09;&#x09;&#x09; * Remarque : cette etape consiste a gerer vos lites d&apos;attentes&#x0A;&#x09;&#x09;&#x09;&#x09; * -----------------------------------------------------------------------------------------------&#x0A;&#x09;&#x09;&#x09;&#x09; */&#x0A;&#x09;&#x09;&#x09;&#x09;System.out.println(&quot;\tThread (&quot; + nextLog.getPerson().getName() + &quot;) has finished to read the document&quot;);&#x0A;&#x0A;&#x09;&#x09;&#x09;&#x09;break;&#x0A;&#x09;&#x09;&#x09;default:&#x0A;&#x09;&#x09;&#x09;&#x09;System.out.println(&quot;\tThread (&quot; + nextLog.getPerson().getName() + &quot;) is doing non conventionnal actions&quot;);&#x0A;&#x0A;&#x09;&#x09;&#x09;&#x09;break;&#x0A;&#x09;&#x09;&#x09;}&#x0A;"/>
+			<item value="latch"/>
+			<item value="on"/>
+			<item value="ch.hearc.Exemples.Semaphores.exemple0"/>
+			<item value="AvionCircular"/>
+			<item value="AvionBlocking"/>
+			<item value="throws InterruptedException"/>
+			<item value="throse"/>
+		</list>
+		<list key="replacehistory">
+			<item value=""/>
+			<item value="Avion"/>
+			<item value=" "/>
+			<item value="AvionCircular"/>
+			<item value="randomTime()"/>
+			<item value="randomTime"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item key="DIALOG_WIDTH" value="812"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+		<item key="DIALOG_HEIGHT" value="566"/>
+		<item key="DIALOG_X_ORIGIN" value="1077"/>
+		<item key="DIALOG_Y_ORIGIN" value="242"/>
+	</section>
+</section>

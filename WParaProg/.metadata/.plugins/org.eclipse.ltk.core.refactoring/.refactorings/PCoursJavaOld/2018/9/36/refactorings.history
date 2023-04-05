@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move 3 elements to &apos;PCoursJava&apos;&#x0D;&#x0A;- Original project: &apos;PCoursJavaOld&apos;&#x0D;&#x0A;- Destination element: &apos;PCoursJava&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     Devoirs.txt&#x0D;&#x0A;     template.txt&#x0D;&#x0A;     shorcut.txt&#x0D;&#x0A;- Update references to refactored element" description="Move files" destination="=PCoursJava" element1="Devoirs.txt" element2="template.txt" element3="shorcut.txt" files="3" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1536143649302" units="0" version="1.0"/>
+</session>

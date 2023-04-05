@@ -1,0 +1,58 @@
+
+package ch.hearc.cours_01.kitbase.hello;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+
+public class Test
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	@Override
+	protected void paintComponent(Graphics g)
+		{
+		super.paintComponent(g);
+
+		Graphics2D g2D = (Graphics2D)g;
+
+		AffineTransform transform = g2D.getTransform(); //sauvegarde
+		Color color = g2D.getColor(); //sauvegarde
+		Font font = g2D.getFont(); //sauvegarde
+
+		dessiner(g2D);
+
+		g2D.setFont(font); //restore
+		g2D.setColor(color); //restore
+		g2D.setTransform(transform); //restore
+		}
+
+	private void dessiner(Graphics2D g2d)
+		{
+		// TODO
+		}
+
+	/*------------------------------*\
+	|*				Set				*|
+	\*------------------------------*/
+
+	/*------------------------------*\
+	|*				Get				*|
+	\*------------------------------*/
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+	}

@@ -1,0 +1,58 @@
+
+package ch.hearc.SA.labo1.tools;
+
+public class Log
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+
+	public Log(Type type, Person person, Action action)
+		{
+		this.type = type;
+		this.person = person;
+		this.action = action;
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------*\
+	|*				Get				*|
+	\*------------------------------*/
+
+	public Type getType()
+		{
+		return type;
+		}
+
+	public Person getPerson()
+		{
+		return person;
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+
+	public enum Type
+		{
+	WAITING, REMOVE, FINISHED
+		}
+
+	public enum Action
+		{
+	PUT, REMOVE, PROCESSING
+		}
+
+	private Type type;
+	private Person person;
+	private Action action;
+
+	}

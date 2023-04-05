@@ -1,0 +1,74 @@
+#!/bin/bash
+#
+
+set -e
+set -u
+
+# Goal:
+#
+#		Lancer un code java et lui passer 3 inputs
+#		Ranger ce script et les codes java dans /opt/quadra
+#
+# Usage:
+#
+#		cd /opt/quadra
+#
+#	  ./runQuadra.sh 3 2 4
+#
+# Input:
+#
+#     $1 $2 $3 represente 3 variables recu comme parametre d'entree depuis l'exterieur
+#
+# Emplacement script runQuadra.sh: 
+#
+#		/opt/quadra
+#
+# Installation:
+#
+#		(I1) Deposer ce script dans Deploy de votre workspace
+#
+#		(I2) Tester le dans votre workspace
+#
+# 		(I2) Copier le contenu du folder Deploy de votre workspace dans le folder ci-dessous de la machine de destination:
+#
+#	   				/opt/quadra/	
+#
+# Warning:
+#
+#		Lisez d'abord document tips et installJava fournit.
+#		(en particulier changer les LF avec dos2unix)
+#
+# Droits et LF:
+#
+#		sudo dos2unix /opt/quadra/runQuadra.sh
+#		sudo chmod a+x -R /opt/quadra
+#
+# Tip:
+#
+#	  Tester ce runQuadra.sh (sans sudo)
+#
+#			cd /opt/quadra
+#			./runQuadra.sh  3 2 4
+#
+#
+
+# -------------------------------------------
+# 			Debug
+# -------------------------------------------
+
+#java -version
+#echo ""
+
+# -------------------------------------------
+# 			Run
+# -------------------------------------------
+
+
+java -cp .:./*:./ext/* -Da=$1 -Db=$2 -Dc$3 ch.hearc.cours_01.kitbase.quadra.UseQuadra 
+
+
+# -------------------------------------------
+# 			end
+# -------------------------------------------
+
+echo ""
