@@ -90,6 +90,25 @@ public class Person implements Runnable
 			}
 		}
 
+	/**
+	 * Compute time passed in this particular runnable
+	 * @return the time passed in this runnable
+	 */
+	public long timePassed()
+		{
+		long currentTime = System.currentTimeMillis();
+		long timePassed = currentTime - timer.startTime;
+		long timeInPause = currentTime - startPause;
+
+		if (paused)
+			{
+			return timePassed - timePaused - timeInPause;
+			}
+		else
+			{
+			return timePassed - timePaused;
+			}
+		}
 
 	/*------------------------------*\
 	|*				Get				*|
@@ -123,8 +142,7 @@ public class Person implements Runnable
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
-
-	/**
+	/*
 	 * Sleep method to not have to have try catch in all the code
 	 * Sleep the thread for 100 milisecond until enought time has passed
 	 */
@@ -142,27 +160,6 @@ public class Person implements Runnable
 				}
 			}
 		}
-
-	/**
-	 * Compute time passed in this particular runnable
-	 * @return the time passed in this runnable
-	 */
-	private long timePassed()
-		{
-		long currentTime = System.currentTimeMillis();
-		long timePassed = currentTime - timer.startTime;
-		long timeInPause = currentTime - startPause;
-
-		if (paused)
-			{
-			return timePassed - timePaused - timeInPause;
-			}
-		else
-			{
-			return timePassed - timePaused;
-			}
-		}
-
 	/*------------------------------------------------------------------*\
 	|*							Enumeration Public						*|
 	\*------------------------------------------------------------------*/

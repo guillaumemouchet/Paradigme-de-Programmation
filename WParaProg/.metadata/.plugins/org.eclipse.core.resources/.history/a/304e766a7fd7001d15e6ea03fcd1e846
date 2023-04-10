@@ -58,18 +58,12 @@ public class UseLabo1
 			System.out.println("*           Labo 1 - Paradigme de Programmation         *");
 			System.out.println("*           Guillaume Mouchet - ISC3il-a                *");
 			System.out.println("---------------------------------------------------------");
-			Scanner sc = new Scanner(System.in);
 
-			while(nbPersons<=0 || nbPersons>9)
-				{
-			System.out.println("Insert the number of readers / writers [1:9]:");
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Insert the number of readers / writers :");
 			nbPersons = sc.nextInt();
-				}
-			while(nbDocuments<=0 || nbDocuments>9)
-				{
-			System.out.println("Insert the number of concurrent documents [1:9] :");
+			System.out.println("Insert the number of concurrent documents :");
 			nbDocuments = sc.nextInt();
-				}
 
 
 			// Database

@@ -40,7 +40,7 @@ public class Person implements Runnable
 			 * -----------------------------------------------------------------------------------------------
 			 */
 			this.sleepTimePassed(startingTime); //1)
-			waitingLogger.addWaiting(this, this.durationTime); //2)
+			waitingLogger.addWaiting(this); //2)
 
 			if (role == Role.READER)
 				{
@@ -58,7 +58,7 @@ public class Person implements Runnable
 				doc.getReadLock().lock(); //2)
 				this.sleepTimePassed(durationTime); // 1) 3)
 				doc.readContent(); //4)
-				waitingLogger.removeWaiting(this, this.durationTime);
+				waitingLogger.removeWaiting(this);
 				doc.getReadLock().unlock(); // 2)
 				}
 			else
@@ -77,11 +77,11 @@ public class Person implements Runnable
 				doc.getWriteLock().lock(); //2)
 				this.sleepTimePassed(durationTime); // 1) 3)
 				doc.setContent(this.name); //4)
-				waitingLogger.removeWaiting(this, this.durationTime);
+				waitingLogger.removeWaiting(this);
 				doc.getWriteLock().unlock(); // 2)
 				}
 
-			waitingLogger.finished(this, this.durationTime);
+			waitingLogger.finished(this);
 
 			}
 		catch (Exception e)

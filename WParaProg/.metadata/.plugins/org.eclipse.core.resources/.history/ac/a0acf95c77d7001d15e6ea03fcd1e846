@@ -90,7 +90,7 @@ public class Person implements Runnable
 			}
 		}
 
-
+	
 	/*------------------------------*\
 	|*				Get				*|
 	\*------------------------------*/
@@ -123,7 +123,7 @@ public class Person implements Runnable
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
-
+	
 	/**
 	 * Sleep method to not have to have try catch in all the code
 	 * Sleep the thread for 100 milisecond until enought time has passed
@@ -142,7 +142,7 @@ public class Person implements Runnable
 				}
 			}
 		}
-
+	
 	/**
 	 * Compute time passed in this particular runnable
 	 * @return the time passed in this runnable

@@ -143,7 +143,7 @@ public class WaitingLogger
 			}
 
 		logsQueue.add(new Log(Log.Type.PROCESSING, p, Log.Action.REMOVE));
-		logsQueue.add(new Log(Log.Type.FINISHED, p, Log.Action.PUT));
+		logsQueue.add(new Log(Log.Type.FINISHED, p, Log.Action.FINISHED));
 
 		}
 
@@ -242,7 +242,7 @@ public class WaitingLogger
 	 * Show the state of the Queue
 	 * They use they own display list to have a one by one display
 	 * They don't show the transition when a Person is removed (the Person is just not visible)
-	 * He will re-appear once a PUT is called
+	 * He well reapear once a PUT is called
 	 */
 	private void printQueueStates(Log nextLog)
 		{
@@ -355,6 +355,9 @@ public class WaitingLogger
 			case REMOVE:
 				action = "removed from";
 				break;
+			case FINISHED:
+				action = "finished";
+				break;
 			default:
 			}
 		// Treat log Type
@@ -372,7 +375,7 @@ public class WaitingLogger
 				break;
 			case FINISHED:
 
-				System.out.println(">>>> Thread (" + nextLog.getPerson().getName() + ")" + " finished the end of all the actions " + nextLog.getPerson().getDocument().getName());
+				System.out.println(">>>> Thread (" + nextLog.getPerson().getName() + ") " + action + " the end of all the actions " + nextLog.getPerson().getDocument().getName());
 
 				break;
 			default:
@@ -434,6 +437,20 @@ public class WaitingLogger
 						logsListDisplay.add(new Log(Log.Type.FINISHED, person, Log.Action.REMOVE));
 
 						finishedListDisplay.remove(person);
+						break;
+					default:
+					}
+			case FINISHED:
+				switch(type)
+					{
+					case WAITING:
+						//NEVER CALLED
+						break;
+					case PROCESSING:
+						//NEVER CALLED
+						break;
+					case FINISHED:
+						logsListDisplay.add(new Log(Log.Type.FINISHED, person, Log.Action.FINISHED));
 						break;
 					default:
 					}
