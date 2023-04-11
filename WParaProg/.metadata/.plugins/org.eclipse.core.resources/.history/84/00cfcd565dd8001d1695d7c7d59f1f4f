@@ -20,11 +20,16 @@ public class WaitingLogger
 
 	private WaitingLogger()
 		{
+		//Helpers
 		db = Database.getInstance();
+
+		//BlockingQueue
 		finishedQueue = new LinkedBlockingQueue<Person>();
 		logsQueue = new LinkedBlockingQueue<Log>();
 		processingQueue = new LinkedBlockingQueue<Person>();
 		waitingQueue = new LinkedBlockingQueue<Person>();
+
+		//Display
 		finishedListDisplay = new ArrayList<Person>();
 		processingListDisplay = new ArrayList<Person>();
 		waitingListDisplay = new ArrayList<Person>();
@@ -35,10 +40,6 @@ public class WaitingLogger
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
-	public void setNbPersons(int value)
-		{
-		nbPersons = value;
-		}
 
 	/**
 	 * Assign the future task to be able to cancel it when all threads are done
@@ -60,15 +61,16 @@ public class WaitingLogger
 		{
 		/*
 		 * -----------------------------------------------------------------------------------
-		 * DONE : Ajouter une personne (thread) dans la liste d'attente d'acces a son document
+		 * DONE : 1) Ajouter une personne (thread) dans la liste d'attente d'acces a son document
 		 *
 		 * Remarque : ne pas oublier la concurrence
 		 * -----------------------------------------------------------------------------------
 		 */
 		try
 			{
-			waitingQueue.put(p);
 			this.sleep(timer);
+
+			waitingQueue.put(p); //1)
 			}
 		catch (InterruptedException e)
 			{
@@ -87,17 +89,20 @@ public class WaitingLogger
 		{
 		/*
 		 * ---------------------------------------------------------------------------------
-		 * DONE : Enlever une personne (thread) de la liste d'attente d'acces a son document
+		 * DONE : 1) Enlever une personne (thread) de la liste d'attente d'acces a son document
+		 * 		  2) Ajouter une personne (thread) dans la liste de traitement du document
 		 *
 		 * Remarque : ne pas oublier la concurrence
 		 * ---------------------------------------------------------------------------------
 		 */
-		this.sleep(timer);
 
 		try
 			{
-			waitingQueue.remove(p);
-			processingQueue.put(p);
+			this.sleep(timer);
+
+			waitingQueue.remove(p); //1)
+			processingQueue.put(p); //2)
+
 			}
 		catch (InterruptedException e)
 			{
@@ -118,17 +123,19 @@ public class WaitingLogger
 		{
 		/*
 		 * --------------------------------------------
-		 * Done : Indiquer la fin d'acces a un document
+		 * Done : 	1) Enlever de la liste de process
+		 * 			2) Indiquer la fin d'acces a un document
 		 *
 		 * Remarque : ne pas oublier la concurrence
 		 * --------------------------------------------
 		 */
 
-		this.sleep(timer);
 		try
 			{
-			processingQueue.remove(p);
-			finishedQueue.put(p);
+			this.sleep(timer);
+
+			processingQueue.remove(p); //1)
+			finishedQueue.put(p); //2)
 			}
 		catch (InterruptedException e)
 			{
@@ -136,8 +143,7 @@ public class WaitingLogger
 			}
 
 		logsQueue.add(new Log(Log.Type.PROCESSING, p, Log.Action.REMOVE));
-		//logsQueue.add(new Log(Log.Type.FINISHED, p, Log.Action.PUT)); //No need to put and finish
-		logsQueue.add(new Log(Log.Type.FINISHED, p, Log.Action.FINISHED));
+		logsQueue.add(new Log(Log.Type.FINISHED, p, Log.Action.PUT));
 
 		}
 
@@ -148,9 +154,10 @@ public class WaitingLogger
 		{
 		Log nextLog = null;
 
+		//Check if their is something to display
 		while(logsQueue.size() == 0)
 			{
-			if (finishedQueue.size() != persons.size()) //C'est pas encore fini
+			if (finishedQueue.size() != persons.size())
 				{
 				System.out.println("No Logging in queue, waiting");
 				sleep(1000);
@@ -159,47 +166,38 @@ public class WaitingLogger
 
 		/*
 		 * -----------------------------------------------------------------------------------------------------------
-		 * done : Recuperer le prochain log du stockage pour le traitement
+		 * done : 1) Recuperer le prochain log du stockage pour le traitement
 		 *
 		 * Remarque : a vous de definir votre type de stockage selon l'UI et l'infrastructure que vous voulez utiliser
 		 * -----------------------------------------------------------------------------------------------------------
 		 */
 
-		nextLog = logsQueue.poll();
+		nextLog = logsQueue.poll(); //1)
 
+		//The display are seperated in different functions
+		/*
+		 * All displays where inspired by the demo video for the project
+		 */
 		printThread(persons);
 		printQueueStates(nextLog);
 		printDiagram(persons);
 		printAction(nextLog);
+
 		stepCounter++;
 
 		/*
 		 * -----------------------------------------------------------------------------------------------------------------------------------
-		 * DONE : Controller si il s'agit du dernier log, arreter le programme si c'est le cas
+		 * DONE : 1) Controller si il s'agit du dernier log, arreter le programme si c'est le cas
 		 *
 		 * Remarque : interrompre consoleFuture
 		 *            (2 conditions doivent etre reunies : logs == 0 et nombre de threads termines correspondant aux nombre total de personnes)
 		 * -----------------------------------------------------------------------------------------------------------------------------------
 		 */
-		if (logsQueue.size() == 0 && finishedQueue.size() == persons.size())
+		if (logsQueue.size() == 0 && finishedQueue.size() == persons.size()) //1)
 			{
 			System.out.println("The execution has come to an end");
 			consoleFuture.cancel(true);
 			}
-		}
-
-	public void sleep(long timeDuration)
-		{
-
-		try
-			{
-			Thread.sleep(timeDuration);
-			}
-		catch (InterruptedException e)
-			{
-			System.out.println("Thread " + Thread.currentThread().getId() + " is interrupted");
-			}
-
 		}
 
 	/*------------------------------*\
@@ -221,6 +219,10 @@ public class WaitingLogger
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
+
+	/*
+	 * Show all threads as well with their start time and duration
+	 */
 	private void printThread(ArrayList<Person> persons)
 		{
 		// Print threads
@@ -228,13 +230,20 @@ public class WaitingLogger
 		System.out.println("---- Threads list ----------------------------------------------");
 		System.out.println();
 		persons.stream()//
-				.forEach(person -> System.out.println("-" + person.getName() //
-						+ " (" + person.getRole() //
-						+ ") start : " + person.getStartingTime() //
-						+ " / duration : " + person.getDurationTime() //
-						+ " (" + person.getDocument().getName() + ")"));
+				.forEach(person -> System.out.println(//
+						person.getName() //
+								+ " (" + person.getRole() //
+								+ ") start : " + person.getStartingTime() //
+								+ " / duration : " + person.getDurationTime() //
+								+ " (" + person.getDocument().getName() + ")"));
 		}
 
+	/*
+	 * Show the state of the Queue
+	 * They use they own display list to have a one by one display
+	 * They don't show the transition when a Person is removed (the Person is just not visible)
+	 * He will re-appear once a PUT is called
+	 */
 	private void printQueueStates(Log nextLog)
 		{
 		updateListDisplay(nextLog.getType(), nextLog.getPerson(), nextLog.getAction());
@@ -247,70 +256,96 @@ public class WaitingLogger
 		for(Document document:db.getDocuments())
 			{
 			System.out.print(document.getName() + " (WAITING)\t: ");
-			waitingListDisplay.stream().filter(person -> person.getDocument().equals(document))//
-					.forEach(person -> System.out.print(person.getName() + " " + "(" + person.getRole().toString().charAt(0) + ")" + " "));
+			waitingListDisplay.stream()//
+					.filter(person -> person.getDocument().equals(document))//
+					.forEach(person -> System.out.print(//
+							person.getName() + " (" + person.getRole().toString().charAt(0) + ") "));
 			System.out.println();
 
 			System.out.print(document.getName() + " (PROCESSING)\t: ");
-			processingListDisplay.stream().filter(person -> person.getDocument().equals(document))//
-					.forEach(person -> System.out.print(person.getName() + " " + "(" + person.getRole().toString().charAt(0) + ")" + " "));
+			processingListDisplay.stream().filter(//
+					person -> person.getDocument().equals(document))//
+					.forEach(person -> System.out.print(//
+							person.getName() + " (" + person.getRole().toString().charAt(0) + ") "));
 			System.out.println();
 
 			System.out.print(document.getName() + " (FINISHED)\t: ");
-			finishedListDisplay.stream().filter(person -> person.getDocument().equals(document))//
-					.forEach(person -> System.out.print(person.getName() + " " + "(" + person.getRole().toString().charAt(0) + ")" + " "));
-			System.out.println();
+			finishedListDisplay.stream().filter(//
+					person -> person.getDocument().equals(document))//
+					.forEach(person -> System.out.print(//
+							person.getName() + " (" + person.getRole().toString().charAt(0) + ") "));
 			System.out.println();
 
+			System.out.println();
 			}
 		}
 
+	/*
+	 * Show a diagramme of the action made by the persons on a document
+	 * They are displayed step by step (some may be similar, but cut in more action to add visibility)
+	 * Use it's own LogListDisplay to keep in memory all action done on the documents
+	 */
 	private void printDiagram(ArrayList<Person> persons)
 		{
 		// Print Diagram
+		System.out.println("\n---- Diagram ---------------------------------------------------\n");
 
-		System.out.println();
-		System.out.println("---- Diagram ---------------------------------------------------");
-		System.out.println();
+		System.out.println("W: Waiting / R: Removed from waiting / P: Processing / F: Finished\n");
 
-		System.out.println("W: Waiting / R: Removed from waiting / P: Processing / F: Finished");
-		System.out.println();
 		System.out.print("Step\t\t\t");
-		IntStream.range(0, stepCounter).forEach(i -> System.out.print(i + "\t"));
+
+		IntStream.range(0, stepCounter).forEach(i -> System.out.print(i + "\t")); // Display the different steps
 		System.out.println();
 
 		for(Person person:persons)
 			{
+			//Display all the current person
 			System.out.print(person.getName() + " " + "(" + person.getRole() + ")\t");
-			int lastPosition = 0;
-			Log log = null;
+
+			int lastPosition = 0; //used to get how many tabs or "-" must be displayed
+
+			//To show all action made by the current person
+			Log currentLog = null;
 			for(int i = 0; i < logsListDisplay.size(); i++)
 				{
 				if (logsListDisplay.get(i).getPerson() == person)
 					{
-					log = logsListDisplay.get(i);
+					currentLog = logsListDisplay.get(i);
+
+					//To help visibility if a put action is made it will be linked to it's remove action
 					if (logsListDisplay.get(lastPosition).getAction() == Action.PUT && logsListDisplay.get(lastPosition).getPerson() == person)
 						{
 						System.out.print("--------".repeat(Math.abs(i - lastPosition)));
 						}
-					else
+					else //else a tab is put
 						{
+						/*
+						 * NOTE : a tab is equals to 6 "-", a seventh is put to correspond to the number displayed for the step
+						 */
 						System.out.print("\t".repeat(Math.abs(i - lastPosition)));
 						}
 
-					lastPosition = i;
-					System.out.print(log.getType() == Type.WAITING && log.getAction() == Action.REMOVE ? "R" : log.getType().toString().charAt(0));
+					lastPosition = i; //The last position where a action was made is the current one
+
+					//Depending on the Action and the type a char is displayed, normally the first of the Type, except for the end of waiting
+					System.out.print(//
+							currentLog.getType() == Type.WAITING && currentLog.getAction() == Action.REMOVE//
+							? "R" : currentLog.getType().toString().charAt(0));
 					}
 				}
 			System.out.println();
 			}
 		}
 
+	/*
+	 * Display in text the last action that was made
+	 * Depending on the Action and the Type
+	 */
 	private void printAction(Log nextLog)
 		{
 		System.out.println();
 
-		// Treat log type
+		// Treat log action
 		String action = "";
 		switch(nextLog.getAction())
 			{
@@ -320,11 +355,9 @@ public class WaitingLogger
 			case REMOVE:
 				action = "removed from";
 				break;
-			case FINISHED:
-				action = "finished";
-				break;
 			default:
 			}
+		// Treat log Type
 		switch(nextLog.getType())
 			{
 
@@ -339,7 +372,7 @@ public class WaitingLogger
 				break;
 			case FINISHED:
 
-				System.out.println(">>>> Thread (" + nextLog.getPerson().getName() + ") " + action + " the end of all the actions " + nextLog.getPerson().getDocument().getName());
+				System.out.println(">>>> Thread (" + nextLog.getPerson().getName() + ")" + " finished the end of all the actions " + nextLog.getPerson().getDocument().getName());
 
 				break;
 			default:
@@ -351,6 +384,12 @@ public class WaitingLogger
 
 		}
 
+	/*
+	 * Update all the Display list
+	 * Allows to do step by step visualisation
+	 * Not all cases as used
+	 * When the action is finished no need to put it in or try to remove it
+	 */
 	private void updateListDisplay(Log.Type type, Person person, Action action)
 		{
 
@@ -392,29 +431,33 @@ public class WaitingLogger
 						processingListDisplay.remove(person);
 						break;
 					case FINISHED:
-						logsListDisplay.add(new Log(Log.Type.FINISHED, person, Log.Action.REMOVE)); //NEVER CALLED
+						logsListDisplay.add(new Log(Log.Type.FINISHED, person, Log.Action.REMOVE));
 
 						finishedListDisplay.remove(person);
-						break;
-					default:
-					}
-			case FINISHED:
-				switch(type)
-					{
-					case WAITING:
-						//NEVER CALLED
-						break;
-					case PROCESSING:
-						//NEVER CALLED
-						break;
-					case FINISHED:
-						logsListDisplay.add(new Log(Log.Type.FINISHED, person, Log.Action.FINISHED));
 						break;
 					default:
 					}
 				break;
 			default:
 			}
+		}
+
+	/**
+	 * Sleep for a certain given time
+	 * @params timeDuration : time the Threads is sleeping
+	 **/
+	private void sleep(long timeDuration)
+		{
+
+		try
+			{
+			Thread.sleep(timeDuration);
+			}
+		catch (InterruptedException e)
+			{
+			System.out.println("Thread " + Thread.currentThread().getId() + " is interrupted");
+			}
+
 		}
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
@@ -445,7 +488,6 @@ public class WaitingLogger
 
 	// Variables
 	private ArrayList<Person> persons;
-	private int nbPersons;
 	// Singletons
 	private Database db;
 

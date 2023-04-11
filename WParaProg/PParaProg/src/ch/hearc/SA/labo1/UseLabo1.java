@@ -60,12 +60,12 @@ public class UseLabo1
 			System.out.println("---------------------------------------------------------");
 			Scanner sc = new Scanner(System.in);
 
-			while(nbPersons<=0 || nbPersons>9)
+			while(nbPersons<1 || nbPersons>9)
 				{
 			System.out.println("Insert the number of readers / writers [1:9]:");
 			nbPersons = sc.nextInt();
 				}
-			while(nbDocuments<=0 || nbDocuments>9)
+			while(nbDocuments<1 || nbDocuments>9)
 				{
 			System.out.println("Insert the number of concurrent documents [1:9] :");
 			nbDocuments = sc.nextInt();

@@ -55,9 +55,8 @@ public class WaitingLogger
 	/**
 	 * Add a thread to the waiting queue
 	 * @param p Person waiting to access a document
-	 * @param timer Time of the operation
 	 */
-	public void addWaiting(Person p, long timer)
+	public void addWaiting(Person p)
 		{
 		/*
 		 * -----------------------------------------------------------------------------------
@@ -68,8 +67,6 @@ public class WaitingLogger
 		 */
 		try
 			{
-			this.sleep(timer);
-
 			waitingQueue.put(p); //1)
 			}
 		catch (InterruptedException e)
@@ -83,9 +80,8 @@ public class WaitingLogger
 	/**
 	 * Remove a thread from the waiting queue and add it to the processing queue
 	 * @param p Person accessing the document
-	 * @param timer Time of the operation
 	 */
-	public void removeWaiting(Person p, long timer)
+	public void removeWaiting(Person p)
 		{
 		/*
 		 * ---------------------------------------------------------------------------------
@@ -98,7 +94,6 @@ public class WaitingLogger
 
 		try
 			{
-			this.sleep(timer);
 
 			waitingQueue.remove(p); //1)
 			processingQueue.put(p); //2)
@@ -117,9 +112,8 @@ public class WaitingLogger
 	/**
 	 * Remove a thread from the processing queue
 	 * @param p Person finishing to access the document
-	 * @param timer Time of the operation
 	 */
-	public void finished(Person p, long timer)
+	public void finished(Person p)
 		{
 		/*
 		 * --------------------------------------------
@@ -132,8 +126,6 @@ public class WaitingLogger
 
 		try
 			{
-			this.sleep(timer);
-
 			processingQueue.remove(p); //1)
 			finishedQueue.put(p); //2)
 			}
@@ -166,7 +158,7 @@ public class WaitingLogger
 
 		/*
 		 * -----------------------------------------------------------------------------------------------------------
-		 * done : 1) Recuperer le prochain log du stockage pour le traitement
+		 * DONE : 1) Recuperer le prochain log du stockage pour le traitement
 		 *
 		 * Remarque : a vous de definir votre type de stockage selon l'UI et l'infrastructure que vous voulez utiliser
 		 * -----------------------------------------------------------------------------------------------------------
@@ -174,8 +166,8 @@ public class WaitingLogger
 
 		nextLog = logsQueue.poll(); //1)
 
-		//The display are seperated in different functions
 		/*
+		 * The display are seperated in different functions
 		 * All displays where inspired by the demo video for the project
 		 */
 		printThread(persons);
@@ -220,7 +212,7 @@ public class WaitingLogger
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
 
-	/*
+	/**
 	 * Show all threads as well with their start time and duration
 	 */
 	private void printThread(ArrayList<Person> persons)
@@ -238,7 +230,7 @@ public class WaitingLogger
 								+ " (" + person.getDocument().getName() + ")"));
 		}
 
-	/*
+	/**
 	 * Show the state of the Queue
 	 * They use they own display list to have a one by one display
 	 * They don't show the transition when a Person is removed (the Person is just not visible)
@@ -253,6 +245,9 @@ public class WaitingLogger
 		System.out.println("---- Queue states ----------------------------------------------");
 		System.out.println();
 
+		/*
+		 * Filter for each document if the person is working on it
+		 */
 		for(Document document:db.getDocuments())
 			{
 			System.out.print(document.getName() + " (WAITING)\t: ");
@@ -280,7 +275,7 @@ public class WaitingLogger
 			}
 		}
 
-	/*
+	/**
 	 * Show a diagramme of the action made by the persons on a document
 	 * They are displayed step by step (some may be similar, but cut in more action to add visibility)
 	 * Use it's own LogListDisplay to keep in memory all action done on the documents
@@ -304,7 +299,7 @@ public class WaitingLogger
 
 			int lastPosition = 0; //used to get how many tabs or "-" must be displayed
 
-			//To show all action made by the current person
+			//Show all action made by the current person
 			Log currentLog = null;
 			for(int i = 0; i < logsListDisplay.size(); i++)
 				{
@@ -337,7 +332,7 @@ public class WaitingLogger
 			}
 		}
 
-	/*
+	/**
 	 * Display in text the last action that was made
 	 * Depending on the Action and the Type
 	 */
@@ -384,11 +379,11 @@ public class WaitingLogger
 
 		}
 
-	/*
+	/**
 	 * Update all the Display list
 	 * Allows to do step by step visualisation
 	 * Not all cases as used
-	 * When the action is finished no need to put it in or try to remove it
+	 * When the action is finished no use of removed
 	 */
 	private void updateListDisplay(Log.Type type, Person person, Action action)
 		{

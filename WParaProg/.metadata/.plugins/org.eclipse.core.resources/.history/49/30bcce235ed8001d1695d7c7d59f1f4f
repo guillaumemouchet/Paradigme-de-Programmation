@@ -54,16 +54,22 @@ public class UseLabo1
 			 * Remarque : via console ou interface graphique
 			 * ----------------------------------------------------------------------------------------
 			 */
-			System.out.println("-----------------------------------------------");
-			System.out.println("*	   Labo 1 - Paradigme de Programmation    *");
-			System.out.println("*	   Guillaume Mouchet - ISC3il-a           *");
-			System.out.println("-----------------------------------------------");
-
+			System.out.println("---------------------------------------------------------");
+			System.out.println("*           Labo 1 - Paradigme de Programmation         *");
+			System.out.println("*           Guillaume Mouchet - ISC3il-a                *");
+			System.out.println("---------------------------------------------------------");
 			Scanner sc = new Scanner(System.in);
-			System.out.println("Veuillez saisir le nombre de personnes :");
+
+			while(nbPersons<=0 || nbPersons>9)
+				{
+			System.out.println("Insert the number of readers / writers [1:9]:");
 			nbPersons = sc.nextInt();
-			System.out.println("Veuillez saisir le nombre de documents :");
+				}
+			while(nbDocuments<=0 || nbDocuments>9)
+				{
+			System.out.println("Insert the number of concurrent documents [1:9] :");
 			nbDocuments = sc.nextInt();
+				}
 
 
 			// Database
@@ -72,7 +78,6 @@ public class UseLabo1
 
 			// Waiting logger
 			WaitingLogger waitingLogger = WaitingLogger.getInstance();
-			waitingLogger.setNbPersons(nbPersons);
 
 			// Create threads
 			ArrayList<Person> persons = generatePopulation(db, nbPersons);
@@ -107,20 +112,22 @@ public class UseLabo1
 				sc = new Scanner(System.in);
 				System.out.println("Veuillez entrer NEXT (N/n) pour continuer ou EXIT (E/e) pour sortir de l'application:");
 				next = sc.nextLine();
+
+
 				if (next.equals("NEXT") || next.equals("N") || next.equals("n"))
 					{
-					waitingLogger.popNextLog(); //Fait l'affichage tout seul
+					waitingLogger.popNextLog(); //Do all the display
 					}
 				else if (next.equals("EXIT") || next.equals("E") || next.equals("e"))
 					{
 					System.out.println("The programme has ended");
-					consoleTask.cancel(true);
+					consoleTask.cancel(true); //Cancel the consoleTask
 					}
 
 				}
 			sc.close();
 
-			threads.stream().forEach(t -> t.interrupt());
+			threads.stream().forEach(t -> t.interrupt()); //Interrupts all the threads
 			return "";
 			}
 		});

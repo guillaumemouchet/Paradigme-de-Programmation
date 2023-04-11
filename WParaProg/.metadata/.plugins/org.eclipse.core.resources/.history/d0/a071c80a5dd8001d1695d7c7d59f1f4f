@@ -24,7 +24,7 @@ public class Document
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	/**
+	/*
 	 * The ReadLock must be used before calling this method
 	 */
 	public String readContent()
@@ -36,7 +36,7 @@ public class Document
 	|*				Set				*|
 	\*------------------------------*/
 
-	/**
+	/*
 	 * The WriteLock must be used before calling this method
 	 */
 	public void setContent(String newContent)
@@ -53,7 +53,7 @@ public class Document
 		return name;
 		}
 
-	/**
+	/*
 	 * The Person will be able to get the log
 	 * He is responsible to use them before accessing the document
 	 */
