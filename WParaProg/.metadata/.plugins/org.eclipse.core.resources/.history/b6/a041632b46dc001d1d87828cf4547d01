@@ -106,7 +106,7 @@ public class WaitingLogger
 		 *
 		 * Remarque : ne pas oublier la concurrence
 		 * 		 	: Les listes d'attentes sont représentées par la Logs Queue et ses actions
-		 * 			: La Queue de fin est utile pour savoir la fin d'execution
+		 * 			: La liste de fin est utile pour savoir la fin d'execution
 
 		 * --------------------------------------------
 		 */
@@ -458,8 +458,10 @@ public class WaitingLogger
 	// BlockginQueue to have a concurrent storage
 	private BlockingQueue<Log> logsQueue;
 	private BlockingQueue<Person> finishedQueue;
+//	private BlockingQueue<Person> processingQueue;
+//	private BlockingQueue<Person> waitingQueue;
 
-	//Similar to their BlockingQueue but don't pop the actions to display them one by one
+	//Similar to their BlockingQueu but don't pop the actions to display them one by one
 	private ArrayList<Log> logsListDisplay;
 	private ArrayList<Person> finishedListDisplay;
 	private ArrayList<Person> processingListDisplay;

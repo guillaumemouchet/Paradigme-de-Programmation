@@ -25,8 +25,8 @@ public class WaitingLogger
 
 		//BlockingQueue
 		finishedQueue = new LinkedBlockingQueue<Person>();
-//		processingQueue = new LinkedBlockingQueue<Person>();
-//		waitingQueue = new LinkedBlockingQueue<Person>();
+		processingQueue = new LinkedBlockingQueue<Person>();
+		waitingQueue = new LinkedBlockingQueue<Person>();
 		logsQueue = new LinkedBlockingQueue<Log>();
 
 
@@ -64,10 +64,16 @@ public class WaitingLogger
 		 * DONE : 1) Ajouter une personne (thread) dans la liste d'attente d'acces a son document
 		 *
 		 * Remarque : ne pas oublier la concurrence
-		 * 		 	: Les listes d'attentes sont représentées par la Logs Queue et ses actions
-
 		 * -----------------------------------------------------------------------------------
 		 */
+//		try
+//			{
+//			waitingQueue.put(p); //1)
+//			}
+//		catch (InterruptedException e)
+//			{
+//			System.out.println("Thread " + Thread.currentThread().getId() + " is interrupted");
+//			}
 
 		logsQueue.add(new Log(Log.Type.WAITING, p, Log.Action.PUT)); // 1)
 		}
@@ -84,9 +90,20 @@ public class WaitingLogger
 		 * 		  2) Ajouter une personne (thread) dans la liste de traitement du document
 		 *
 		 * Remarque : ne pas oublier la concurrence
-		 * 		 	: Les listes d'attentes sont représentées par la Logs Queue et ses actions
 		 * ---------------------------------------------------------------------------------
 		 */
+//
+//		try
+//			{
+//
+//			waitingQueue.remove(p); //1)
+//			processingQueue.put(p); //2)
+//
+//			}
+//		catch (InterruptedException e)
+//			{
+//			System.out.println("Thread " + Thread.currentThread().getId() + " is interrupted");
+//			}
 
 		logsQueue.add(new Log(Log.Type.WAITING, p, Log.Action.REMOVE)); //1)
 		logsQueue.add(new Log(Log.Type.PROCESSING, p, Log.Action.PUT)); //2)
@@ -105,14 +122,12 @@ public class WaitingLogger
 		 * 			2) Indiquer la fin d'acces a un document
 		 *
 		 * Remarque : ne pas oublier la concurrence
-		 * 		 	: Les listes d'attentes sont représentées par la Logs Queue et ses actions
-		 * 			: La Queue de fin est utile pour savoir la fin d'execution
-
 		 * --------------------------------------------
 		 */
 
 		try
 			{
+			//processingQueue.remove(p); //1)
 			finishedQueue.put(p); //2)
 			}
 		catch (InterruptedException e)
@@ -458,8 +473,10 @@ public class WaitingLogger
 	// BlockginQueue to have a concurrent storage
 	private BlockingQueue<Log> logsQueue;
 	private BlockingQueue<Person> finishedQueue;
+	private BlockingQueue<Person> processingQueue;
+	private BlockingQueue<Person> waitingQueue;
 
-	//Similar to their BlockingQueue but don't pop the actions to display them one by one
+	//Similar to their BlockingQueu but don't pop the actions to display them one by one
 	private ArrayList<Log> logsListDisplay;
 	private ArrayList<Person> finishedListDisplay;
 	private ArrayList<Person> processingListDisplay;

@@ -459,7 +459,7 @@ public class WaitingLogger
 	private BlockingQueue<Log> logsQueue;
 	private BlockingQueue<Person> finishedQueue;
 
-	//Similar to their BlockingQueue but don't pop the actions to display them one by one
+	//Similar to their BlockingQueu but don't pop the actions to display them one by one
 	private ArrayList<Log> logsListDisplay;
 	private ArrayList<Person> finishedListDisplay;
 	private ArrayList<Person> processingListDisplay;

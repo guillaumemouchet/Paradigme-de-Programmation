@@ -113,6 +113,7 @@ public class UseLabo1
 				System.out.println("Veuillez entrer NEXT (N/n) pour continuer ou EXIT (E/e) pour sortir de l'application:");
 				next = sc.nextLine();
 
+
 				if (next.equals("NEXT") || next.equals("N") || next.equals("n"))
 					{
 					waitingLogger.popNextLog(); //Do all the display
