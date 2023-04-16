@@ -156,9 +156,9 @@ public class WaitingLogger
 		 * The display are seperated in different functions
 		 * All displays where inspired by the demo video for the project
 		 */
-		printThread();
+		printThread(persons);
 		printQueueStates(nextLog);
-		printDiagram();
+		printDiagram(persons);
 		printAction(nextLog);
 
 		stepCounter++;
@@ -201,7 +201,7 @@ public class WaitingLogger
 	/**
 	 * Show all threads as well with their start time and duration
 	 */
-	private void printThread()
+	private void printThread(ArrayList<Person> persons)
 		{
 		// Print threads
 		System.out.println();
@@ -266,7 +266,7 @@ public class WaitingLogger
 	 * They are displayed step by step (some may be similar, but cut in more action to add visibility)
 	 * Use it's own LogListDisplay to keep in memory all action done on the documents
 	 */
-	private void printDiagram()
+	private void printDiagram(ArrayList<Person> persons)
 		{
 		// Print Diagram
 		System.out.println("\n---- Diagram ---------------------------------------------------\n");
@@ -373,7 +373,7 @@ public class WaitingLogger
 	 */
 	private void updateListDisplay(Log nextLog)
 		{
-
+		
 		Type type = nextLog.getType();
 		Person person = nextLog.getPerson();
 		Action action = nextLog.getAction();
@@ -384,12 +384,18 @@ public class WaitingLogger
 				switch(type)
 					{
 					case WAITING:
+						logsListDisplay.add(new Log(Log.Type.WAITING, person, Log.Action.PUT));
+
 						waitingListDisplay.add(person);
 						break;
 					case PROCESSING:
+						logsListDisplay.add(new Log(Log.Type.PROCESSING, person, Log.Action.PUT));
+
 						processingListDisplay.add(person);
 						break;
 					case FINISHED:
+						logsListDisplay.add(new Log(Log.Type.FINISHED, person, Log.Action.PUT));
+
 						finishedListDisplay.add(person);
 						break;
 					default:
@@ -399,12 +405,18 @@ public class WaitingLogger
 				switch(type)
 					{
 					case WAITING:
+						logsListDisplay.add(new Log(Log.Type.WAITING, person, Log.Action.REMOVE));
+
 						waitingListDisplay.remove(person);
 						break;
 					case PROCESSING:
+						logsListDisplay.add(new Log(Log.Type.PROCESSING, person, Log.Action.REMOVE));
+
 						processingListDisplay.remove(person);
 						break;
 					case FINISHED:
+						logsListDisplay.add(new Log(Log.Type.FINISHED, person, Log.Action.REMOVE));
+
 						finishedListDisplay.remove(person);
 						break;
 					default:
@@ -412,8 +424,6 @@ public class WaitingLogger
 				break;
 			default:
 			}
-		logsListDisplay.add(nextLog);
-
 		}
 
 	/**
@@ -422,6 +432,7 @@ public class WaitingLogger
 	 **/
 	private void sleep(long timeDuration)
 		{
+
 		try
 			{
 			Thread.sleep(timeDuration);

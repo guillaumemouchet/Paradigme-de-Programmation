@@ -156,9 +156,9 @@ public class WaitingLogger
 		 * The display are seperated in different functions
 		 * All displays where inspired by the demo video for the project
 		 */
-		printThread();
+		printThread(persons);
 		printQueueStates(nextLog);
-		printDiagram();
+		printDiagram(persons);
 		printAction(nextLog);
 
 		stepCounter++;
@@ -201,7 +201,7 @@ public class WaitingLogger
 	/**
 	 * Show all threads as well with their start time and duration
 	 */
-	private void printThread()
+	private void printThread(ArrayList<Person> persons)
 		{
 		// Print threads
 		System.out.println();
@@ -266,7 +266,7 @@ public class WaitingLogger
 	 * They are displayed step by step (some may be similar, but cut in more action to add visibility)
 	 * Use it's own LogListDisplay to keep in memory all action done on the documents
 	 */
-	private void printDiagram()
+	private void printDiagram(ArrayList<Person> persons)
 		{
 		// Print Diagram
 		System.out.println("\n---- Diagram ---------------------------------------------------\n");
@@ -422,6 +422,7 @@ public class WaitingLogger
 	 **/
 	private void sleep(long timeDuration)
 		{
+
 		try
 			{
 			Thread.sleep(timeDuration);
