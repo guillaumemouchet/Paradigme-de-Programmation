@@ -25,9 +25,10 @@ public class WaitingLogger
 
 		//BlockingQueue
 		finishedQueue = new LinkedBlockingQueue<Person>();
+//		processingQueue = new LinkedBlockingQueue<Person>();
+//		waitingQueue = new LinkedBlockingQueue<Person>();
 		logsQueue = new LinkedBlockingQueue<Log>();
-		processingQueue = new LinkedBlockingQueue<Person>();
-		waitingQueue = new LinkedBlockingQueue<Person>();
+
 
 		//Display
 		finishedListDisplay = new ArrayList<Person>();
@@ -63,18 +64,12 @@ public class WaitingLogger
 		 * DONE : 1) Ajouter une personne (thread) dans la liste d'attente d'acces a son document
 		 *
 		 * Remarque : ne pas oublier la concurrence
+		 * 		 	: Les listes d'attentes sont représentées par la Logs Queue et ses actions
+
 		 * -----------------------------------------------------------------------------------
 		 */
-		try
-			{
-			waitingQueue.put(p); //1)
-			}
-		catch (InterruptedException e)
-			{
-			System.out.println("Thread " + Thread.currentThread().getId() + " is interrupted");
-			}
 
-		logsQueue.add(new Log(Log.Type.WAITING, p, Log.Action.PUT));
+		logsQueue.add(new Log(Log.Type.WAITING, p, Log.Action.PUT)); // 1)
 		}
 
 	/**
@@ -89,23 +84,12 @@ public class WaitingLogger
 		 * 		  2) Ajouter une personne (thread) dans la liste de traitement du document
 		 *
 		 * Remarque : ne pas oublier la concurrence
+		 * 		 	: Les listes d'attentes sont représentées par la Logs Queue et ses actions
 		 * ---------------------------------------------------------------------------------
 		 */
 
-		try
-			{
-
-			waitingQueue.remove(p); //1)
-			processingQueue.put(p); //2)
-
-			}
-		catch (InterruptedException e)
-			{
-			System.out.println("Thread " + Thread.currentThread().getId() + " is interrupted");
-			}
-
-		logsQueue.add(new Log(Log.Type.WAITING, p, Log.Action.REMOVE));
-		logsQueue.add(new Log(Log.Type.PROCESSING, p, Log.Action.PUT));
+		logsQueue.add(new Log(Log.Type.WAITING, p, Log.Action.REMOVE)); //1)
+		logsQueue.add(new Log(Log.Type.PROCESSING, p, Log.Action.PUT)); //2)
 
 		}
 
@@ -121,12 +105,14 @@ public class WaitingLogger
 		 * 			2) Indiquer la fin d'acces a un document
 		 *
 		 * Remarque : ne pas oublier la concurrence
+		 * 		 	: Les listes d'attentes sont représentées par la Logs Queue et ses actions
+		 * 			: La Queue de fin est utile pour savoir la fin d'execution
+
 		 * --------------------------------------------
 		 */
 
 		try
 			{
-			processingQueue.remove(p); //1)
 			finishedQueue.put(p); //2)
 			}
 		catch (InterruptedException e)
@@ -134,8 +120,8 @@ public class WaitingLogger
 			System.out.println("Thread " + Thread.currentThread().getId() + " is interrupted");
 			}
 
-		logsQueue.add(new Log(Log.Type.PROCESSING, p, Log.Action.REMOVE));
-		logsQueue.add(new Log(Log.Type.FINISHED, p, Log.Action.PUT));
+		logsQueue.add(new Log(Log.Type.PROCESSING, p, Log.Action.REMOVE)); //1)
+		logsQueue.add(new Log(Log.Type.FINISHED, p, Log.Action.PUT)); //2)
 
 		}
 
@@ -170,9 +156,9 @@ public class WaitingLogger
 		 * The display are seperated in different functions
 		 * All displays where inspired by the demo video for the project
 		 */
-		printThread(persons);
+		printThread();
 		printQueueStates(nextLog);
-		printDiagram(persons);
+		printDiagram();
 		printAction(nextLog);
 
 		stepCounter++;
@@ -215,7 +201,7 @@ public class WaitingLogger
 	/**
 	 * Show all threads as well with their start time and duration
 	 */
-	private void printThread(ArrayList<Person> persons)
+	private void printThread()
 		{
 		// Print threads
 		System.out.println();
@@ -238,7 +224,7 @@ public class WaitingLogger
 	 */
 	private void printQueueStates(Log nextLog)
 		{
-		updateListDisplay(nextLog.getType(), nextLog.getPerson(), nextLog.getAction());
+		updateListDisplay(nextLog);
 
 		// Print Queue states
 		System.out.println();
@@ -280,7 +266,7 @@ public class WaitingLogger
 	 * They are displayed step by step (some may be similar, but cut in more action to add visibility)
 	 * Use it's own LogListDisplay to keep in memory all action done on the documents
 	 */
-	private void printDiagram(ArrayList<Person> persons)
+	private void printDiagram()
 		{
 		// Print Diagram
 		System.out.println("\n---- Diagram ---------------------------------------------------\n");
@@ -385,9 +371,12 @@ public class WaitingLogger
 	 * Not all cases as used
 	 * When the action is finished no use of removed
 	 */
-	private void updateListDisplay(Log.Type type, Person person, Action action)
+	private void updateListDisplay(Log nextLog)
 		{
 
+		Type type = nextLog.getType();
+		Person person = nextLog.getPerson();
+		Action action = nextLog.getAction();
 		// Update lists
 		switch(action)
 			{
@@ -395,18 +384,12 @@ public class WaitingLogger
 				switch(type)
 					{
 					case WAITING:
-						logsListDisplay.add(new Log(Log.Type.WAITING, person, Log.Action.PUT));
-
 						waitingListDisplay.add(person);
 						break;
 					case PROCESSING:
-						logsListDisplay.add(new Log(Log.Type.PROCESSING, person, Log.Action.PUT));
-
 						processingListDisplay.add(person);
 						break;
 					case FINISHED:
-						logsListDisplay.add(new Log(Log.Type.FINISHED, person, Log.Action.PUT));
-
 						finishedListDisplay.add(person);
 						break;
 					default:
@@ -416,18 +399,12 @@ public class WaitingLogger
 				switch(type)
 					{
 					case WAITING:
-						logsListDisplay.add(new Log(Log.Type.WAITING, person, Log.Action.REMOVE));
-
 						waitingListDisplay.remove(person);
 						break;
 					case PROCESSING:
-						logsListDisplay.add(new Log(Log.Type.PROCESSING, person, Log.Action.REMOVE));
-
 						processingListDisplay.remove(person);
 						break;
 					case FINISHED:
-						logsListDisplay.add(new Log(Log.Type.FINISHED, person, Log.Action.REMOVE));
-
 						finishedListDisplay.remove(person);
 						break;
 					default:
@@ -435,6 +412,8 @@ public class WaitingLogger
 				break;
 			default:
 			}
+		logsListDisplay.add(nextLog);
+
 		}
 
 	/**
@@ -443,7 +422,6 @@ public class WaitingLogger
 	 **/
 	private void sleep(long timeDuration)
 		{
-
 		try
 			{
 			Thread.sleep(timeDuration);
@@ -472,10 +450,8 @@ public class WaitingLogger
 	// BlockginQueue to have a concurrent storage
 	private BlockingQueue<Log> logsQueue;
 	private BlockingQueue<Person> finishedQueue;
-	private BlockingQueue<Person> processingQueue;
-	private BlockingQueue<Person> waitingQueue;
 
-	//Similar to their BlockingQueu but don't pop the actions to display them one by one
+	//Similar to their BlockingQueue but don't pop the actions to display them one by one
 	private ArrayList<Log> logsListDisplay;
 	private ArrayList<Person> finishedListDisplay;
 	private ArrayList<Person> processingListDisplay;

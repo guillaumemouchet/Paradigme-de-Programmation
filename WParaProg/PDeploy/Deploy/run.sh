@@ -65,7 +65,7 @@ set -u
 # -------------------------------------------
 
 #version light
-java -cp .:./*:./ext/* ch.hearc.cours_01.kitbase.hello.UseHello
+java -cp .:./*:./ext/* ch.hearc.SA.labo1.UseLabo1
 
 # version avec options
 # java -cp .:./*:./ext/* -Xmx20m -Xms10m -verbose:gc -ea ch.hearc.cours_01.kitbase.hello.UseHello

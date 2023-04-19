@@ -25,8 +25,6 @@ public class WaitingLogger
 
 		//BlockingQueue
 		finishedQueue = new LinkedBlockingQueue<Person>();
-//		processingQueue = new LinkedBlockingQueue<Person>();
-//		waitingQueue = new LinkedBlockingQueue<Person>();
 		logsQueue = new LinkedBlockingQueue<Log>();
 
 
@@ -280,7 +278,7 @@ public class WaitingLogger
 
 		for(Person person:persons)
 			{
-			//Display all the current person
+			//Display the current person
 			System.out.print(person.getName() + " " + "(" + person.getRole() + ")\t");
 
 			int lastPosition = 0; //used to get how many tabs or "-" must be displayed
@@ -369,7 +367,7 @@ public class WaitingLogger
 	 * Update all the Display list
 	 * Allows to do step by step visualisation
 	 * Not all cases as used
-	 * When the action is finished no use of removed
+	 * The removed from finished is never used
 	 */
 	private void updateListDisplay(Log nextLog)
 		{

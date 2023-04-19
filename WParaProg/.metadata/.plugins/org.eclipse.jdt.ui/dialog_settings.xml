@@ -143,9 +143,10 @@
 		<item key="FatJarPackageWizardPage.ANTSCRIPT_SAVE" value="false"/>
 		<item key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION" value="C:\DEV\Java\WParaProg"/>
 		<item key="FatJarPackageWizardPage.LIBRARY_HANDLING" value="1"/>
-		<item key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME" value="Main - PParaProg"/>
-		<item key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION" value="C:\Users\Guillaume\Desktop\Rendu ParaProg\Labo1_Mouchet_Mouchet.jar"/>
+		<item key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME" value="UseLabo1 - PParaProg"/>
+		<item key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION" value="C:\Users\Guillaume\Desktop\Labo1_Mouchet.jar"/>
 		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="C:\Users\Guillaume\Desktop\Labo1_Mouchet.jar"/>
 			<item value="C:\Users\Guillaume\Desktop\Rendu ParaProg\Labo1_Mouchet_Mouchet.jar"/>
 			<item value="C:\Users\Guillaume\Desktop\Labo1_Mouchet_Mouchet.jar"/>
 		</list>
