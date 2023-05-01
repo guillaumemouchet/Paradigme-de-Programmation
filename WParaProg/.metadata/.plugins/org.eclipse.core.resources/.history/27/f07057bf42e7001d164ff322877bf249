@@ -1,0 +1,58 @@
+package ch.hearc.SA.labo2.BlockingQueue;
+
+import java.util.ArrayList;
+
+/**
+ * Singleton
+ */
+public class TimePerformance {
+    private static TimePerformance instance = null;
+    private final ArrayList<Long> arraySortTimes = new ArrayList<>();
+    private final ArrayList<Long> arrayCreateTimes = new ArrayList<>();
+    private long startTime;
+    private long endTime;
+
+    private TimePerformance() {
+    }
+
+    public static synchronized TimePerformance getInstance() {
+        if (instance == null) {
+            instance = new TimePerformance();
+        }
+        return instance;
+    }
+
+    public void markStartTime() {
+        startTime = System.nanoTime();
+    }
+
+    public void markEndTime() {
+        endTime = System.nanoTime();
+    }
+
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public long getEndTime() {
+        return endTime;
+    }
+
+    public void arraySortSentTime() {
+    arraySortTimes.add(System.nanoTime());
+    }
+
+    public void arrayCreateSentTime() {
+    arrayCreateTimes.add(System.nanoTime());
+    }
+
+
+    public ArrayList<Long> getArraySortTimes() {
+        return arraySortTimes;
+    }
+
+    public ArrayList<Long> getArrayCreateTimes() {
+        return arrayCreateTimes;
+    }
+
+}

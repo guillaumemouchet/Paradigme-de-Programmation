@@ -1,0 +1,43 @@
+
+package ch.hearc.SA.labo2.BlockingQueue;
+
+import java.util.Arrays;
+import java.util.concurrent.BlockingQueue;
+
+public class Consommateur implements Runnable
+	{
+
+	private BlockingQueue<Message> queue;
+
+	public Consommateur(BlockingQueue<Message> queue)
+		{
+		this.queue = queue;
+		}
+
+	@Override
+	public void run()
+		{
+		String name = Thread.currentThread().getName();
+
+		while(true)
+			{
+				Message msg;
+				try
+					{
+					msg = queue.take();
+					//process the message now
+
+					System.out.println("\t" + name + " array before process : " + Arrays.toString(msg.getArray()));
+					System.out.println("\t" + name + " array after process : " + Arrays.toString(msg.sortArray()));
+
+					}
+				catch (InterruptedException e)
+					{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					}
+
+			}
+		}
+
+	}

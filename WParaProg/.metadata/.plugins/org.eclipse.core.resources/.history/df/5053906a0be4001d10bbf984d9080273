@@ -1,0 +1,48 @@
+
+package ch.hearc.SA.labo2;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
+public class Message
+	{
+	
+	//tools
+	private int[] array;
+	
+	public Message(int size)
+		{
+		Random rand = new Random();
+		array = new int[size];
+		for(int i = 0; i < size; i++)
+			{
+			array[i] = rand.nextInt(size * 10);
+			}
+		}
+		
+	public int[] getArray()
+		{
+		return array;
+		}
+		
+	public int[] sortArray()
+		{
+		Arrays.sort(this.array);
+		return array;
+		}
+		
+	public int[] shuffleArray()
+		{
+		
+		List<Integer> intList = Arrays.asList(array);
+		
+		Collections.shuffle(intList);
+		
+		intList.toArray(intArray);
+		Arrays.sort(this.array);
+		return array;
+		}
+		
+	}

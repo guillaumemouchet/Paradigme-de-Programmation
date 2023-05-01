@@ -1,0 +1,2 @@
+NbProducteurs;  NbConsommateurs; QueueSize; Elapsed time [ms];Throughput [msg/s];Effective throughput [B/s];Latency [ms]
+10000.0;10.0;3.0;1.0;10000.0;0.0;0.0;0.4

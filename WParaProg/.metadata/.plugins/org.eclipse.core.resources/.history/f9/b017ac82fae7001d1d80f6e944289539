@@ -1,0 +1,61 @@
+
+package ch.hearc.SA.labo2.BlockingQueue.Producteur_Consommateur;
+
+import java.util.Arrays;
+import java.util.concurrent.BlockingQueue;
+
+import ch.hearc.SA.labo2.BlockingQueue.Performance.TimePerformance;
+
+public class Consumer implements Runnable
+	{
+
+	private BlockingQueue<int[]> queue;
+	private long executionTime;
+
+	public Consumer(BlockingQueue<int[]> queue, long executionTime)
+		{
+		this.queue = queue;
+		this.executionTime = executionTime;
+		}
+
+	private void trace(String m)
+		{
+		System.out.println(m);
+		Thread.yield();
+		}
+
+	@Override
+	public void run()
+		{
+		String name = Thread.currentThread().getName();
+		//System.out.println(name + " started");
+
+		while(System.currentTimeMillis() - TimePerformance.getInstance().getStartTime() < executionTime)
+			{
+			int[] array;
+			try
+				{
+				Thread.sleep(1000);
+				if (!queue.isEmpty())
+					{
+					long startTime = System.currentTimeMillis();
+					array = queue.take();
+					//process the message now
+					Arrays.sort(array);
+					TimePerformance.getInstance().arraySortSentTime(System.currentTimeMillis() - startTime);
+
+					//trace("\t" + name + " array after process : " + Arrays.toString(array));
+					}
+
+				}
+			catch (InterruptedException e)
+				{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				}
+
+			}
+		System.out.println("Out c");
+		}
+
+	}

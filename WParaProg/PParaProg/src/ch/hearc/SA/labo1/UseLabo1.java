@@ -119,7 +119,7 @@ public class UseLabo1
 					}
 				else if (next.equals("EXIT") || next.equals("E") || next.equals("e"))
 					{
-					System.out.println("The programme has ended");
+					System.out.println("The program was put to an end");
 					consoleTask.cancel(true); //Cancel the consoleTask
 					}
 

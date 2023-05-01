@@ -1,0 +1,40 @@
+
+package ch.hearc.SA.labo2.BlockingQueue;
+
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+
+public class Main
+	{
+
+	/*
+	 * Les performances définissent la quantité de travail qu'une application peut traiter pendant une certaine période et la vitesse à laquelle elle peut traiter une unité de travail.
+     * La latence est le temps nécessaire pour effectuer une action ou pour produire un résultat.
+     * Le débit est le nombre d'actions exécutées, de résultats d'actions exécutées ou de résultats produits par unité de temps.
+	 */
+	public static void main(String[] args)
+		{
+		long executionTime = 1000;
+		BlockingQueue<int[]> queue = new ArrayBlockingQueue<int[]>(10);
+		BlockingQueue<Long> timeList = new LinkedBlockingQueue<Long>();
+		
+		int nbConsommateurs = 3;
+		for(int i = 0; i < nbConsommateurs; i++)
+			{
+			Consommateur consommateur = new Consommateur(queue,timeList);
+			new Thread(consommateur, "Consommateur" + i).start();
+			}
+		
+		int nbProducteurs = 1;
+		for(int i = 0; i < nbProducteurs; i++)
+			{
+			Producteur producteur = new Producteur(queue,timeList);
+			new Thread(producteur, "Producteur" + i).start();
+			}
+
+		System.out.println("All the threads are started");
+
+		}
+
+	}

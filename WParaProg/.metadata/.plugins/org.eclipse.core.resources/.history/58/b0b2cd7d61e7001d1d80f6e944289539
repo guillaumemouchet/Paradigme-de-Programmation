@@ -1,0 +1,61 @@
+
+package ch.hearc.SA.labo2.BlockingQueue.Use;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+
+import ch.hearc.SA.labo2.BlockingQueue.Performance.CalculatorPerformance;
+import ch.hearc.SA.labo2.BlockingQueue.Performance.TimePerformance;
+import ch.hearc.SA.labo2.BlockingQueue.Producteur_Consommateur.Consumer;
+import ch.hearc.SA.labo2.BlockingQueue.Producteur_Consommateur.Producer;
+
+public class UseMain
+	{
+
+	public static void run(int nbProducteurs, int nbConsommateurs, int queueSize, long executionTime) throws InterruptedException
+		{
+		TimePerformance.getInstance().markStartTime();
+		//long executionTime = 10000;
+		BlockingQueue<int[]> queue = new ArrayBlockingQueue<int[]>(queueSize);
+		List<Thread> producteurs = new LinkedList<Thread>();
+		List<Thread> consommateurs = new LinkedList<Thread>();
+
+		//int nbProducteurs = 1;
+		for(int i = 0; i < nbProducteurs; i++)
+			{
+			Producer producteur = new Producer(queue, executionTime);
+			Thread t = new Thread(producteur, "Producteur" + i);
+			producteurs.add(t);
+			t.start();
+			}
+
+		//int nbConsommateurs = 3;
+		for(int i = 0; i < nbConsommateurs; i++)
+			{
+			Consumer consommateur = new Consumer(queue, executionTime);
+			Thread t = new Thread(consommateur, "Consommateur" + i);
+			consommateurs.add(t);
+			t.start();
+			}
+
+		System.out.println("All the threads have started");
+
+		for(Thread thread:producteurs)
+			{
+			thread.join();
+			}
+		for(Thread thread:consommateurs)
+			{
+			thread.join();
+			}
+		System.out.println("Execution Ended");
+
+		TimePerformance.getInstance().markEndTime();
+
+		CalculatorPerformance.createReport(nbProducteurs, nbConsommateurs, queueSize, executionTime);
+
+		}
+
+	}

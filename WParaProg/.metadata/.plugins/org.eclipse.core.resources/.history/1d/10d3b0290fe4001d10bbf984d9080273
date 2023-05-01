@@ -1,0 +1,46 @@
+
+package ch.hearc.SA.labo2;
+
+import java.util.Arrays;
+
+public class Producteur implements Runnable
+	{
+
+	private Message msg;
+
+	public Producteur(Message msg)
+		{
+		this.msg = msg;
+		}
+
+	@Override
+	public void run()
+		{
+		String name = Thread.currentThread().getName();
+
+		System.out.println(name + " started");
+
+		while(true)
+			{
+			try
+				{
+				Thread.sleep(1000);
+				synchronized (msg)
+					{
+					if(!msg.new_array)
+						{
+						System.out.println("\n" + name + " shuffling the array : " + Arrays.toString(msg.newArray()) + "\n");
+						}
+					//msg.notify();
+					msg.notifyAll(); //Annonce à tout les consommateurs qu'ils peuvent venir
+					//prendre une valeur existante.
+					}
+				}
+			catch (InterruptedException e)
+				{
+				e.printStackTrace();
+				}
+			}
+		}
+
+	}

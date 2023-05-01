@@ -1,0 +1,104 @@
+
+package ch.hearc.SA.labo2.BlockingQueue;
+
+import java.util.ArrayList;
+
+
+/*
+ * Les performances définissent la quantité de travail qu'une application peut traiter pendant une certaine période et la vitesse à laquelle elle peut traiter une unité de travail.
+ * La latence est le temps nécessaire pour effectuer une action ou pour produire un résultat.
+ * Le débit est le nombre d'actions exécutées, de résultats d'actions exécutées ou de résultats produits par unité de temps.
+ */
+public class PerformanceCalculator
+	{
+
+	private static double latencyMs;
+	private static double débitSort;
+	private static double débitCreate;
+	private static long elapsedTimeMs;
+
+	public static String createReport(int nbProducteurs, int nbConsommateurs, int queueSize, long executionTime)
+		{
+		ArrayList<Long> shuffleTimes = TimePerformance.getInstance().getArrayCreateTimes();
+		ArrayList<Long> sortTimes = TimePerformance.getInstance().getArraySortTimes();
+		débitSort = sortTimes.size()/executionTime;
+		débitCreate = shuffleTimes.size()/executionTime;
+
+		elapsedTimeMs = executionTime;
+//		/*
+//		 * We have to ignore the messages that aren't in the shownTimes because the buffer might have been full.
+//		 * This means we use shownTimes.size() instead of sentTimes.size() in the average calculation.
+//		 */
+//		OptionalDouble latencyNs;
+//		if (sentTimes.size() >= shownTimes.size())
+//			{
+//			latencyNs = IntStream.range(0, shownTimes.size()).mapToDouble(i -> (shownTimes.get(i) - sentTimes.get(i))).average();
+//			}
+//		else
+//			{
+//			latencyNs = IntStream.range(0, sentTimes.size()).mapToDouble(i -> (shownTimes.get(i) - sentTimes.get(i))).average();
+//			}
+//
+//		if (latencyNs.isEmpty())
+//			{ throw new RuntimeException("The latency could not be calculated"); }
+//
+//		latencyMs = latencyNs.getAsDouble() / 1000000; // milliseconds
+//
+//		int nbMessages = Settings.getNbMessages();
+//
+//		long startTime = PerformanceMeasures.getInstance().getStartTime();
+//		long endTime = PerformanceMeasures.getInstance().getEndTime();
+//		long elapsedTimeNs = endTime - startTime;
+//		elapsedTimeMs = elapsedTimeNs / 1000000; // milliseconds
+//
+//		double throughputMpNs = nbMessages / (double)elapsedTimeMs; // messages per millisecond
+//		throughputMsgPerS = throughputMpNs * 1000000000; // messages per second
+//		throughputBPerS = averageMessageSizeInBytes() * throughputMsgPerS; // bytes per second
+//
+//		StringBuilder stringBuilder = new StringBuilder();
+//		stringBuilder.append("------------------------------------------------------------------").append("\n");
+//		stringBuilder.append("Settings:\n");
+//		stringBuilder.append("Number of persons: ").append(tabs(4)).append(Settings.getNbPersons()).append("\n");
+//		stringBuilder.append("Buffer size: ").append(tabs(5)).append(Settings.getBufferSize()).append("\n");
+//		stringBuilder.append("Number of messages: ").append(tabs(3)).append(Settings.getNbMessages()).append("\n");
+//
+//		stringBuilder.append("------------------------------------------------------------------").append("\n");
+//		stringBuilder.append("Performance report:\n");
+//		stringBuilder.append("Elapsed time [s]: ").append(tabs(4)).append(round(elapsedTimeMs / (double)1000000000)).append("\n");
+//		stringBuilder.append("Throughput [msg/ms]: ").append(tabs(3)).append(round(throughputMsgPerS)).append("\n");
+//		stringBuilder.append("Effective throughput [B/s]: ").append(tabs(1)).append(round(throughputBPerS)).append("\n");
+//		stringBuilder.append("Effective throughput [Mb/s]: ").append(tabs(1)).append(round(throughputBPerS / 1000000)).append("\n");
+//		stringBuilder.append("Latency [ms]: ").append(tabs(5)).append(round(latencyMs)).append("\n");
+//		stringBuilder.append("Average message size [B]: ").append(tabs(2)).append(round(averageMessageSizeInBytes())).append("\n");
+
+		//return stringBuilder.toString();
+		return "";
+		}
+
+	private static double round(double value)
+		{
+		return Math.round(value * 100.0) / 100.0;
+		}
+
+	private static String tabs(int nb)
+		{
+		return "\t".repeat(Math.max(0, nb));
+		}
+
+	/**
+	 * Elapsed time [ms]<br>
+	 * Throughput [msg/s]<br>
+	 * Effective throughput [B/s]<br>
+	 * Latency [ms]<br>
+	 * @return
+	 */
+	public static ArrayList<Double> getImportantValues()
+		{
+		ArrayList<Double> values = new ArrayList<>();
+		values.add((double)elapsedTimeMs);
+		values.add(throughputMsgPerS);
+		values.add(throughputBPerS);
+		values.add(latencyMs);
+		return values;
+		}
+	}

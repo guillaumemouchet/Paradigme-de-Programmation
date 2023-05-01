@@ -9,19 +9,14 @@
     <fullyQualifiedTypeName name="java.util.concurrent.locks.Condition"/>
     <fullyQualifiedTypeName name="java.util.Map"/>
     <fullyQualifiedTypeName name="java.lang.InterruptedException"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.util.concurrent.ThreadLocalRandom"/>
-    <fullyQualifiedTypeName name="java.util.concurrent.ArrayBlockingQueue"/>
     <fullyQualifiedTypeName name="ch.hearc.airport.CircularBuffer.AirportManager"/>
     <fullyQualifiedTypeName name="ch.hearc.airport.CircularBuffer.AirportManagerCircular"/>
     <fullyQualifiedTypeName name="ch.hearc.airport.BlockingQueue.AirportManagerBlocking"/>
     <fullyQualifiedTypeName name="java.util.concurrent.ExecutionException"/>
-    <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="java.sql.Date"/>
-    <fullyQualifiedTypeName name="java.util.Arrays"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
-    <fullyQualifiedTypeName name="java.util.concurrent.BlockingQueue"/>
     <fullyQualifiedTypeName name="java.util.concurrent.CyclicBarrier"/>
     <fullyQualifiedTypeName name="java.util.concurrent.CountDownLatch"/>
     <fullyQualifiedTypeName name="ch.hearc.Exemples.CountDownLatch.Latch"/>
@@ -30,4 +25,12 @@
     <fullyQualifiedTypeName name="java.util.stream.IntStream"/>
     <fullyQualifiedTypeName name="java.lang.Math"/>
     <fullyQualifiedTypeName name="ch.hearc.SA.labo1.tools.Log.Type"/>
+    <fullyQualifiedTypeName name="java.util.Random"/>
+    <fullyQualifiedTypeName name="java.lang.ArrayStoreException"/>
+    <fullyQualifiedTypeName name="java.util.Arrays"/>
+    <fullyQualifiedTypeName name="java.util.concurrent.BlockingQueue"/>
+    <fullyQualifiedTypeName name="java.util.concurrent.ArrayBlockingQueue"/>
+    <fullyQualifiedTypeName name="java.util.LinkedList"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="ch.hearc.SA.labo2.BlockingQueue.TimePerformance"/>
 </qualifiedTypeNameHistroy>

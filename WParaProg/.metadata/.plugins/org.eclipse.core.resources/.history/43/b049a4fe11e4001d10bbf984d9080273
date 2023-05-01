@@ -1,0 +1,45 @@
+
+package ch.hearc.SA.labo2.BlockingQueue;
+
+import java.util.Arrays;
+import java.util.concurrent.BlockingQueue;
+
+public class Producteur implements Runnable
+	{
+	
+	private BlockingQueue<Message> queue;
+	
+	public Producteur(BlockingQueue<Message> queue)
+		{
+		this.queue = queue;
+		}
+		
+	@Override
+	public void run()
+		{
+		String name = Thread.currentThread().getName();
+		
+		System.out.println(name + " started");
+		
+		while(true)
+			{
+			
+			try
+				{
+				Thread.sleep(1000);
+				
+				int[] array = random.ints(100000, 10, 100000).toArray();
+				queue.put(array);
+				System.out.println("\n" + name + " creating an array : " + Arrays.toString(new_array) + "\n");
+				
+				}
+			catch (InterruptedException e)
+				{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				}
+				
+			}
+		}
+		
+	}

@@ -1,0 +1,2 @@
+NbProducteurs;  NbConsommateurs; QueueSize; Elapsed time [ms];Débit Sort ;Débit Create;Latency [ms]
+1.0;3.0;10.0;10000.0;0.001;0.001;102.7
