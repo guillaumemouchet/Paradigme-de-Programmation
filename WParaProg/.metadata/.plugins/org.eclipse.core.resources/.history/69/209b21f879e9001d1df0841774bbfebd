@@ -1,0 +1,57 @@
+
+package ch.hearc.SA.labo2.BlockingQueue.Performance;
+
+import java.util.ArrayList;
+
+/*
+ * Les performances définissent la quantité de travail qu'une application peut traiter pendant une certaine période et la vitesse à laquelle elle peut traiter une unité de travail.
+ * La latence est le temps nécessaire pour effectuer une action ou pour produire un résultat.
+ * Le débit est le nombre d'actions exécutées, de résultats d'actions exécutées ou de résultats produits par unité de temps.
+ */
+public class CalculatorPerformance
+	{
+
+	private static double latencyMs;
+	private static double debitSort;
+	private static double debitCreate;
+
+	public static String createReport(int nbProducteurs, int nbConsommateurs, int queueSize, long executionTime)
+		{
+		ArrayList<Long> shuffleTimes = TimePerformance.getInstance().getArrayCreateTimes();
+		ArrayList<Long> sortTimes = TimePerformance.getInstance().getArraySortTimes();
+		debitSort = (double)sortTimes.size() / executionTime;
+		debitCreate = (double)shuffleTimes.size() / executionTime;
+		latencyMs = shuffleTimes.stream().mapToLong(i -> i).average().getAsDouble() + sortTimes.stream().mapToLong(i -> i).average().getAsDouble();
+
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("------------------------------------------------------------------").append("\n");
+		stringBuilder.append("Settings:\n");
+		stringBuilder.append("Number of producers: ").append(tabs(4)).append(nbProducteurs).append("\n");
+		stringBuilder.append("Number of consummers: ").append(tabs(4)).append(nbConsommateurs).append("\n");
+		stringBuilder.append("Queue size: ").append(tabs(5)).append(queueSize).append("\n");
+		stringBuilder.append("Execution Time: ").append(tabs(3)).append(executionTime).append("\n");
+
+		stringBuilder.append("------------------------------------------------------------------").append("\n");
+		stringBuilder.append("Performance report:\n");
+		stringBuilder.append("Elapsed time [s]: ").append(tabs(4)).append(executionTime).append("\n");
+		stringBuilder.append("Débit Sort : ").append(tabs(1)).append(debitSort).append("\n");
+		stringBuilder.append("Débit Create : ").append(tabs(1)).append(debitCreate).append("\n");
+		stringBuilder.append("Latency [ms]: ").append(tabs(5)).append(latencyMs).append("\n");
+
+		return stringBuilder.toString();
+		}
+
+	private static String tabs(int nb)
+		{
+		return "\t".repeat(Math.max(0, nb));
+		}
+
+	public static ArrayList<Double> getImportantValues()
+		{
+		ArrayList<Double> values = new ArrayList<>();
+		values.add(debitSort);
+		values.add(debitCreate);
+		values.add(latencyMs);
+		return values;
+		}
+	}

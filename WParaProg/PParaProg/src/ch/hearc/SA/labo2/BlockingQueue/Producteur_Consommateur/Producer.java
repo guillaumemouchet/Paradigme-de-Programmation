@@ -37,14 +37,17 @@ public class Producer implements Runnable
 			try
 				{
 				Thread.sleep(1000);
-				long startTime = System.currentTimeMillis();
+				if (queue.remainingCapacity()!=0)
+					{
+					long startTime = System.currentTimeMillis();
 
-				Random rand = new Random();
+					Random rand = new Random();
 
-				int[] array = rand.ints(10, 1, 100).toArray();
+					int[] array = rand.ints(10, 1, 100).toArray();
 
-				queue.put(array);
-				TimePerformance.getInstance().arrayCreateSentTime(System.currentTimeMillis() - startTime);
+					queue.put(array);
+					TimePerformance.getInstance().arrayCreateSentTime(System.currentTimeMillis() - startTime);
+					}
 				//trace("\n" + name + " creating an array : " + Arrays.toString(array) + "\n");
 				}
 			catch (InterruptedException e)
@@ -55,7 +58,6 @@ public class Producer implements Runnable
 
 			}
 		System.out.println("Out p");
-
 		}
 
 	}

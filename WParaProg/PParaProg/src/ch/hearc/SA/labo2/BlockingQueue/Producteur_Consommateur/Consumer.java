@@ -42,7 +42,7 @@ public class Consumer implements Runnable
 					array = queue.take();
 					if(array.length==1) //Valeur par défaut pour débloquer
 						{
-						break;
+						break; //break before adding in the time so shouln't be a problem
 						}
 					//process the message now
 					Arrays.sort(array);

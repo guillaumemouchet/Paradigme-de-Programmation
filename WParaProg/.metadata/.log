@@ -4792,3 +4792,377 @@ Caused by: java.io.FileNotFoundException: C:\Program Files\Git\mingw64\share\git
 	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:111)
 	at org.eclipse.swt.graphics.ImageLoader.load(ImageLoader.java:181)
 	... 76 more
+!SESSION 2023-05-03 08:08:12.518 -----------------------------------------------
+eclipse.buildId=4.24.0.I20220607-0700
+java.version=17.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=fr_CH
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.jface 2 0 2023-05-03 08:08:48.110
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2023-05-03 08:08:48.110
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1f293cb7,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@5972e3a,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2023-05-03 08:08:48.110
+!MESSAGE A conflict occurred for ALT+SHIFT+R:
+Binding(ALT+SHIFT+R,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.jdt.ui.category.refactoring,Refactor - Java,Java Refactoring Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@5790cbcb,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+SHIFT+R,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.rename,Rename,
+		Rename the selected item,
+		Category(org.eclipse.ui.category.file,File,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@32c6d164,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.e4.ui.workbench 4 0 2023-05-03 08:08:51.911
+!MESSAGE Unable to retrieve the bundle from the URI: bundleclass://org.eclipse.recommenders.news.rcp/org.eclipse.recommenders.internal.news.rcp.toolbar.NewsToolControl
+
+!ENTRY org.eclipse.ui 4 4 2023-05-03 08:59:31.278
+!MESSAGE To avoid deadlock while executing Display.syncExec() with argument: org.eclipse.jdt.ui.actions.OrganizeImportsAction$$Lambda$1535/0x0000000101010658@502c3675, thread Worker-15: Organize Imports will interrupt UI thread.
+!SUBENTRY 1 org.eclipse.ui 4 4 2023-05-03 08:59:31.278
+!MESSAGE Worker-15: Organize Imports thread is an instance of Worker or owns an ILock
+!STACK 0
+java.lang.IllegalStateException: Call stack for thread Worker-15: Organize Imports
+	at java.management@17.0.3/sun.management.ThreadImpl.dumpThreads0(Native Method)
+	at java.management@17.0.3/sun.management.ThreadImpl.getThreadInfo(ThreadImpl.java:485)
+	at org.eclipse.ui.internal.UILockListener.reportInterruption(UILockListener.java:214)
+	at org.eclipse.ui.internal.UILockListener.interruptUI(UILockListener.java:180)
+	at org.eclipse.ui.internal.PendingSyncExec.waitUntilExecuted(PendingSyncExec.java:92)
+	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:142)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:4790)
+	at org.eclipse.jdt.ui.actions.OrganizeImportsAction.doChooseImports(OrganizeImportsAction.java:350)
+	at org.eclipse.jdt.ui.actions.OrganizeImportsAction.lambda$0(OrganizeImportsAction.java:345)
+	at org.eclipse.jdt.ui.actions.OrganizeImportsAction$$Lambda$1534/0x0000000101010200.chooseImports(Unknown Source)
+	at org.eclipse.jdt.core.manipulation.OrganizeImportsOperation.createTextEdit(OrganizeImportsOperation.java:604)
+	at org.eclipse.jdt.core.manipulation.OrganizeImportsOperation.run(OrganizeImportsOperation.java:549)
+	at org.eclipse.jdt.ui.actions.OrganizeImportsAction$1.run(OrganizeImportsAction.java:298)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 org.eclipse.ui 4 4 2023-05-03 08:59:31.278
+!MESSAGE UI thread waiting on a job or lock.
+!STACK 0
+java.lang.IllegalStateException: Call stack for thread main
+	at org.eclipse.swt.internal.win32.OS.WaitMessage(Native Method)
+	at org.eclipse.swt.widgets.Display.sleep(Display.java:4757)
+	at org.eclipse.jface.window.Window.runEventLoop(Window.java:824)
+	at org.eclipse.jface.window.Window.open(Window.java:799)
+	at org.eclipse.ui.dialogs.AbstractElementListSelectionDialog.open(AbstractElementListSelectionDialog.java:457)
+	at org.eclipse.jdt.internal.ui.dialogs.MultiElementListSelectionDialog.open(MultiElementListSelectionDialog.java:115)
+	at org.eclipse.jdt.ui.actions.OrganizeImportsAction.lambda$1(OrganizeImportsAction.java:368)
+	at org.eclipse.jdt.ui.actions.OrganizeImportsAction$$Lambda$1535/0x0000000101010658.run(Unknown Source)
+	at org.eclipse.ui.internal.PendingSyncExec.run(PendingSyncExec.java:68)
+	at org.eclipse.ui.internal.UILockListener.doPendingWork(UILockListener.java:172)
+	at org.eclipse.ui.internal.UISynchronizer$$Lambda$996/0x0000000100a34468.run(Unknown Source)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:132)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:4043)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3648)
+	at org.eclipse.ui.internal.dialogs.EventLoopProgressMonitor.runEventLoop(EventLoopProgressMonitor.java:126)
+	at org.eclipse.ui.internal.dialogs.EventLoopProgressMonitor.isCanceled(EventLoopProgressMonitor.java:100)
+	at org.eclipse.core.runtime.SubMonitor$RootInfo.isCanceled(SubMonitor.java:235)
+	at org.eclipse.core.runtime.SubMonitor.isCanceled(SubMonitor.java:581)
+	at org.eclipse.core.runtime.ProgressMonitorWrapper.isCanceled(ProgressMonitorWrapper.java:114)
+	at org.eclipse.ui.internal.dialogs.EventLoopProgressMonitor.isCanceled(EventLoopProgressMonitor.java:101)
+	at org.eclipse.core.internal.jobs.ThreadJob.isCanceled(ThreadJob.java:148)
+	at org.eclipse.core.internal.jobs.ThreadJob.waitForRun(ThreadJob.java:280)
+	at org.eclipse.core.internal.jobs.ThreadJob.joinRun(ThreadJob.java:208)
+	at org.eclipse.core.internal.jobs.ImplicitJobs.begin(ImplicitJobs.java:95)
+	at org.eclipse.core.internal.jobs.JobManager.beginRule(JobManager.java:315)
+	at org.eclipse.core.internal.resources.WorkManager.checkIn(WorkManager.java:124)
+	at org.eclipse.core.internal.resources.Workspace.prepareOperation(Workspace.java:2330)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2375)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2405)
+	at org.eclipse.ui.actions.WorkspaceModifyOperation.run(WorkspaceModifyOperation.java:131)
+	at org.eclipse.ui.internal.editors.text.WorkspaceOperationRunner.run(WorkspaceOperationRunner.java:76)
+	at org.eclipse.ui.internal.editors.text.WorkspaceOperationRunner.run(WorkspaceOperationRunner.java:66)
+	at org.eclipse.ui.editors.text.TextFileDocumentProvider.executeOperation(TextFileDocumentProvider.java:461)
+	at org.eclipse.ui.editors.text.TextFileDocumentProvider.validateState(TextFileDocumentProvider.java:1037)
+	at org.eclipse.ui.texteditor.AbstractTextEditor.validateState(AbstractTextEditor.java:4896)
+	at org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitEditor.doSave(CompilationUnitEditor.java:1310)
+	at org.eclipse.ui.texteditor.AbstractTextEditor$TextEditorSavable.doSave(AbstractTextEditor.java:7167)
+	at org.eclipse.ui.Saveable.doSave(Saveable.java:213)
+	at org.eclipse.ui.internal.SaveableHelper.doSaveModel(SaveableHelper.java:333)
+	at org.eclipse.ui.internal.SaveablesList.lambda$2(SaveablesList.java:840)
+	at org.eclipse.ui.internal.SaveablesList$$Lambda$1495/0x0000000100f47898.run(Unknown Source)
+	at org.eclipse.ui.internal.SaveableHelper.lambda$3(SaveableHelper.java:271)
+	at org.eclipse.ui.internal.SaveableHelper$$Lambda$1193/0x0000000100a36c58.run(Unknown Source)
+	at org.eclipse.jface.operation.ModalContext.runInCurrentThread(ModalContext.java:434)
+	at org.eclipse.jface.operation.ModalContext.run(ModalContext.java:352)
+	at org.eclipse.ui.internal.WorkbenchWindow.lambda$7(WorkbenchWindow.java:2345)
+	at org.eclipse.ui.internal.WorkbenchWindow$$Lambda$1194/0x0000000100a36e78.run(Unknown Source)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:74)
+	at org.eclipse.ui.internal.WorkbenchWindow.run(WorkbenchWindow.java:2343)
+	at org.eclipse.ui.internal.SaveableHelper.runProgressMonitorOperation(SaveableHelper.java:278)
+	at org.eclipse.ui.internal.SaveablesList.saveModels(SaveablesList.java:848)
+	at org.eclipse.ui.internal.WorkbenchPage.saveAll(WorkbenchPage.java:3594)
+	at org.eclipse.ui.internal.WorkbenchPage.saveAllEditors(WorkbenchPage.java:3572)
+	at org.eclipse.ui.internal.handlers.SaveAllHandler.execute(SaveAllHandler.java:52)
+	at org.eclipse.ui.internal.handlers.HandlerProxy.execute(HandlerProxy.java:283)
+	at org.eclipse.ui.internal.handlers.E4HandlerProxy.execute(E4HandlerProxy.java:97)
+	at jdk.internal.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at java.base@17.0.3/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base@17.0.3/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:58)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.invokeUsingClass(InjectorImpl.java:317)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.invoke(InjectorImpl.java:251)
+	at org.eclipse.e4.core.contexts.ContextInjectionFactory.invoke(ContextInjectionFactory.java:173)
+	at org.eclipse.e4.core.commands.internal.HandlerServiceHandler.execute(HandlerServiceHandler.java:156)
+	at org.eclipse.core.commands.Command.executeWithChecks(Command.java:488)
+	at org.eclipse.core.commands.ParameterizedCommand.executeWithChecks(ParameterizedCommand.java:485)
+	at org.eclipse.e4.core.commands.internal.HandlerServiceImpl.executeHandler(HandlerServiceImpl.java:213)
+	at org.eclipse.e4.ui.bindings.keys.KeyBindingDispatcher.executeCommand(KeyBindingDispatcher.java:308)
+	at org.eclipse.e4.ui.bindings.keys.KeyBindingDispatcher.press(KeyBindingDispatcher.java:580)
+	at org.eclipse.e4.ui.bindings.keys.KeyBindingDispatcher.processKeyEvent(KeyBindingDispatcher.java:647)
+	at org.eclipse.e4.ui.bindings.keys.KeyBindingDispatcher.filterKeySequenceBindings(KeyBindingDispatcher.java:439)
+	at org.eclipse.e4.ui.bindings.keys.KeyBindingDispatcher$KeyDownFilter.handleEvent(KeyBindingDispatcher.java:96)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.filterEvent(Display.java:1262)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1065)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1090)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1075)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1117)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Widget.wmChar(Widget.java:1542)
+	at org.eclipse.swt.widgets.Control.WM_CHAR(Control.java:4868)
+	at org.eclipse.swt.widgets.Canvas.WM_CHAR(Canvas.java:345)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4746)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:340)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5026)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(Native Method)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3643)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:644)
+	at org.eclipse.ui.internal.Workbench$$Lambda$266/0x00000001003310f0.run(Unknown Source)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:551)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:156)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:136)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:402)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base@17.0.3/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base@17.0.3/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base@17.0.3/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base@17.0.3/java.lang.reflect.Method.invoke(Method.java:568)
+	at app//org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
+	at app//org.eclipse.equinox.launcher.Main.basicRun(Main.java:596)
+	at app//org.eclipse.equinox.launcher.Main.run(Main.java:1467)
+
+!ENTRY org.eclipse.ui 4 4 2023-05-03 08:59:32.378
+!MESSAGE To avoid deadlock while executing Display.syncExec() with argument: org.eclipse.jdt.ui.actions.OrganizeImportsAction$$Lambda$1535/0x0000000101010658@502c3675, thread Worker-15: Organize Imports will interrupt UI thread.
+!SUBENTRY 1 org.eclipse.ui 4 4 2023-05-03 08:59:32.378
+!MESSAGE Worker-15: Organize Imports thread is an instance of Worker or owns an ILock
+!STACK 0
+java.lang.IllegalStateException: Call stack for thread Worker-15: Organize Imports
+	at java.management@17.0.3/sun.management.ThreadImpl.dumpThreads0(Native Method)
+	at java.management@17.0.3/sun.management.ThreadImpl.getThreadInfo(ThreadImpl.java:485)
+	at org.eclipse.ui.internal.UILockListener.reportInterruption(UILockListener.java:214)
+	at org.eclipse.ui.internal.UILockListener.interruptUI(UILockListener.java:180)
+	at org.eclipse.ui.internal.PendingSyncExec.waitUntilExecuted(PendingSyncExec.java:92)
+	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:142)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:4790)
+	at org.eclipse.jdt.ui.actions.OrganizeImportsAction.doChooseImports(OrganizeImportsAction.java:350)
+	at org.eclipse.jdt.ui.actions.OrganizeImportsAction.lambda$0(OrganizeImportsAction.java:345)
+	at org.eclipse.jdt.ui.actions.OrganizeImportsAction$$Lambda$1534/0x0000000101010200.chooseImports(Unknown Source)
+	at org.eclipse.jdt.core.manipulation.OrganizeImportsOperation.createTextEdit(OrganizeImportsOperation.java:604)
+	at org.eclipse.jdt.core.manipulation.OrganizeImportsOperation.run(OrganizeImportsOperation.java:549)
+	at org.eclipse.jdt.ui.actions.OrganizeImportsAction$1.run(OrganizeImportsAction.java:298)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 org.eclipse.ui 4 4 2023-05-03 08:59:32.379
+!MESSAGE UI thread waiting on a job or lock.
+!STACK 0
+java.lang.IllegalStateException: Call stack for thread main
+	at org.eclipse.swt.internal.win32.OS.GetProp(Native Method)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5028)
+	at org.eclipse.swt.internal.win32.OS.CallWindowProc(Native Method)
+	at org.eclipse.swt.widgets.Button.callWindowProc(Button.java:253)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4847)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5026)
+	at org.eclipse.swt.internal.win32.OS.PeekMessage(Native Method)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3640)
+	at org.eclipse.jface.window.Window.runEventLoop(Window.java:823)
+	at org.eclipse.jface.window.Window.open(Window.java:799)
+	at org.eclipse.ui.dialogs.AbstractElementListSelectionDialog.open(AbstractElementListSelectionDialog.java:457)
+	at org.eclipse.jdt.internal.ui.dialogs.MultiElementListSelectionDialog.open(MultiElementListSelectionDialog.java:115)
+	at org.eclipse.jdt.ui.actions.OrganizeImportsAction.lambda$1(OrganizeImportsAction.java:368)
+	at org.eclipse.jdt.ui.actions.OrganizeImportsAction$$Lambda$1535/0x0000000101010658.run(Unknown Source)
+	at org.eclipse.ui.internal.PendingSyncExec.run(PendingSyncExec.java:68)
+	at org.eclipse.ui.internal.UILockListener.doPendingWork(UILockListener.java:172)
+	at org.eclipse.ui.internal.UISynchronizer$$Lambda$996/0x0000000100a34468.run(Unknown Source)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:132)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:4043)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3648)
+	at org.eclipse.ui.internal.dialogs.EventLoopProgressMonitor.runEventLoop(EventLoopProgressMonitor.java:126)
+	at org.eclipse.ui.internal.dialogs.EventLoopProgressMonitor.isCanceled(EventLoopProgressMonitor.java:100)
+	at org.eclipse.core.runtime.SubMonitor$RootInfo.isCanceled(SubMonitor.java:235)
+	at org.eclipse.core.runtime.SubMonitor.isCanceled(SubMonitor.java:581)
+	at org.eclipse.core.runtime.ProgressMonitorWrapper.isCanceled(ProgressMonitorWrapper.java:114)
+	at org.eclipse.ui.internal.dialogs.EventLoopProgressMonitor.isCanceled(EventLoopProgressMonitor.java:101)
+	at org.eclipse.core.internal.jobs.ThreadJob.isCanceled(ThreadJob.java:148)
+	at org.eclipse.core.internal.jobs.ThreadJob.waitForRun(ThreadJob.java:280)
+	at org.eclipse.core.internal.jobs.ThreadJob.joinRun(ThreadJob.java:208)
+	at org.eclipse.core.internal.jobs.ImplicitJobs.begin(ImplicitJobs.java:95)
+	at org.eclipse.core.internal.jobs.JobManager.beginRule(JobManager.java:315)
+	at org.eclipse.core.internal.resources.WorkManager.checkIn(WorkManager.java:124)
+	at org.eclipse.core.internal.resources.Workspace.prepareOperation(Workspace.java:2330)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2375)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2405)
+	at org.eclipse.ui.actions.WorkspaceModifyOperation.run(WorkspaceModifyOperation.java:131)
+	at org.eclipse.ui.internal.editors.text.WorkspaceOperationRunner.run(WorkspaceOperationRunner.java:76)
+	at org.eclipse.ui.internal.editors.text.WorkspaceOperationRunner.run(WorkspaceOperationRunner.java:66)
+	at org.eclipse.ui.editors.text.TextFileDocumentProvider.executeOperation(TextFileDocumentProvider.java:461)
+	at org.eclipse.ui.editors.text.TextFileDocumentProvider.validateState(TextFileDocumentProvider.java:1037)
+	at org.eclipse.ui.texteditor.AbstractTextEditor.validateState(AbstractTextEditor.java:4896)
+	at org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitEditor.doSave(CompilationUnitEditor.java:1310)
+	at org.eclipse.ui.texteditor.AbstractTextEditor$TextEditorSavable.doSave(AbstractTextEditor.java:7167)
+	at org.eclipse.ui.Saveable.doSave(Saveable.java:213)
+	at org.eclipse.ui.internal.SaveableHelper.doSaveModel(SaveableHelper.java:333)
+	at org.eclipse.ui.internal.SaveablesList.lambda$2(SaveablesList.java:840)
+	at org.eclipse.ui.internal.SaveablesList$$Lambda$1495/0x0000000100f47898.run(Unknown Source)
+	at org.eclipse.ui.internal.SaveableHelper.lambda$3(SaveableHelper.java:271)
+	at org.eclipse.ui.internal.SaveableHelper$$Lambda$1193/0x0000000100a36c58.run(Unknown Source)
+	at org.eclipse.jface.operation.ModalContext.runInCurrentThread(ModalContext.java:434)
+	at org.eclipse.jface.operation.ModalContext.run(ModalContext.java:352)
+	at org.eclipse.ui.internal.WorkbenchWindow.lambda$7(WorkbenchWindow.java:2345)
+	at org.eclipse.ui.internal.WorkbenchWindow$$Lambda$1194/0x0000000100a36e78.run(Unknown Source)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:74)
+	at org.eclipse.ui.internal.WorkbenchWindow.run(WorkbenchWindow.java:2343)
+	at org.eclipse.ui.internal.SaveableHelper.runProgressMonitorOperation(SaveableHelper.java:278)
+	at org.eclipse.ui.internal.SaveablesList.saveModels(SaveablesList.java:848)
+	at org.eclipse.ui.internal.WorkbenchPage.saveAll(WorkbenchPage.java:3594)
+	at org.eclipse.ui.internal.WorkbenchPage.saveAllEditors(WorkbenchPage.java:3572)
+	at org.eclipse.ui.internal.handlers.SaveAllHandler.execute(SaveAllHandler.java:52)
+	at org.eclipse.ui.internal.handlers.HandlerProxy.execute(HandlerProxy.java:283)
+	at org.eclipse.ui.internal.handlers.E4HandlerProxy.execute(E4HandlerProxy.java:97)
+	at jdk.internal.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at java.base@17.0.3/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base@17.0.3/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:58)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.invokeUsingClass(InjectorImpl.java:317)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.invoke(InjectorImpl.java:251)
+	at org.eclipse.e4.core.contexts.ContextInjectionFactory.invoke(ContextInjectionFactory.java:173)
+	at org.eclipse.e4.core.commands.internal.HandlerServiceHandler.execute(HandlerServiceHandler.java:156)
+	at org.eclipse.core.commands.Command.executeWithChecks(Command.java:488)
+	at org.eclipse.core.commands.ParameterizedCommand.executeWithChecks(ParameterizedCommand.java:485)
+	at org.eclipse.e4.core.commands.internal.HandlerServiceImpl.executeHandler(HandlerServiceImpl.java:213)
+	at org.eclipse.e4.ui.bindings.keys.KeyBindingDispatcher.executeCommand(KeyBindingDispatcher.java:308)
+	at org.eclipse.e4.ui.bindings.keys.KeyBindingDispatcher.press(KeyBindingDispatcher.java:580)
+	at org.eclipse.e4.ui.bindings.keys.KeyBindingDispatcher.processKeyEvent(KeyBindingDispatcher.java:647)
+	at org.eclipse.e4.ui.bindings.keys.KeyBindingDispatcher.filterKeySequenceBindings(KeyBindingDispatcher.java:439)
+	at org.eclipse.e4.ui.bindings.keys.KeyBindingDispatcher$KeyDownFilter.handleEvent(KeyBindingDispatcher.java:96)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.filterEvent(Display.java:1262)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1065)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1090)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1075)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1117)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Widget.wmChar(Widget.java:1542)
+	at org.eclipse.swt.widgets.Control.WM_CHAR(Control.java:4868)
+	at org.eclipse.swt.widgets.Canvas.WM_CHAR(Canvas.java:345)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4746)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:340)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5026)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(Native Method)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3643)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:644)
+	at org.eclipse.ui.internal.Workbench$$Lambda$266/0x00000001003310f0.run(Unknown Source)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:551)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:156)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:136)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:402)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base@17.0.3/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base@17.0.3/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base@17.0.3/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base@17.0.3/java.lang.reflect.Method.invoke(Method.java:568)
+	at app//org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
+	at app//org.eclipse.equinox.launcher.Main.basicRun(Main.java:596)
+	at app//org.eclipse.equinox.launcher.Main.run(Main.java:1467)
+!SESSION 2023-05-03 10:02:25.308 -----------------------------------------------
+eclipse.buildId=4.24.0.I20220607-0700
+java.version=17.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=fr_CH
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.jface 2 0 2023-05-03 10:02:34.200
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2023-05-03 10:02:34.200
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@175bf9c9,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@2db3675a,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2023-05-03 10:02:34.200
+!MESSAGE A conflict occurred for ALT+SHIFT+R:
+Binding(ALT+SHIFT+R,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.jdt.ui.category.refactoring,Refactor - Java,Java Refactoring Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@306c9b2c,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+SHIFT+R,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.rename,Rename,
+		Rename the selected item,
+		Category(org.eclipse.ui.category.file,File,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1ab28416,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.e4.ui.workbench 4 0 2023-05-03 10:02:40.051
+!MESSAGE Unable to retrieve the bundle from the URI: bundleclass://org.eclipse.recommenders.news.rcp/org.eclipse.recommenders.internal.news.rcp.toolbar.NewsToolControl

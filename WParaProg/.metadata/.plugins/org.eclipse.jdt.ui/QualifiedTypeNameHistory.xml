@@ -16,7 +16,6 @@
     <fullyQualifiedTypeName name="ch.hearc.airport.BlockingQueue.AirportManagerBlocking"/>
     <fullyQualifiedTypeName name="java.util.concurrent.ExecutionException"/>
     <fullyQualifiedTypeName name="java.sql.Date"/>
-    <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="java.util.concurrent.CyclicBarrier"/>
     <fullyQualifiedTypeName name="java.util.concurrent.CountDownLatch"/>
     <fullyQualifiedTypeName name="ch.hearc.Exemples.CountDownLatch.Latch"/>
@@ -27,10 +26,14 @@
     <fullyQualifiedTypeName name="ch.hearc.SA.labo1.tools.Log.Type"/>
     <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="java.lang.ArrayStoreException"/>
-    <fullyQualifiedTypeName name="java.util.Arrays"/>
     <fullyQualifiedTypeName name="java.util.concurrent.BlockingQueue"/>
     <fullyQualifiedTypeName name="java.util.concurrent.ArrayBlockingQueue"/>
     <fullyQualifiedTypeName name="java.util.LinkedList"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="ch.hearc.SA.labo2.BlockingQueue.TimePerformance"/>
+    <fullyQualifiedTypeName name="ch.hearc.SA.labo2.BlockingQueue.Performance.CalculatorPerformance"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="ch.hearc.SA.labo2.BlockingQueue.Use.UseMain"/>
+    <fullyQualifiedTypeName name="java.util.Arrays"/>
+    <fullyQualifiedTypeName name="java.util.regex.Matcher"/>
 </qualifiedTypeNameHistroy>

@@ -11,18 +11,19 @@ import java.util.ArrayList;
 public class CalculatorPerformance
 	{
 
-	private static double latencyMs;
-	private static double debitSort;
-	private static double debitCreate;
+	private static double latencyMs; //latence
+	private static double debitSort; //débit
+	private static double debitCreate; //débit
+	private static double nbActions; //performance
 
 	public static String createReport(int nbProducteurs, int nbConsommateurs, int queueSize, long executionTime)
 		{
 		ArrayList<Long> shuffleTimes = TimePerformance.getInstance().getArrayCreateTimes();
 		ArrayList<Long> sortTimes = TimePerformance.getInstance().getArraySortTimes();
-		debitSort = (double)sortTimes.size() / executionTime;
-		debitCreate = (double)shuffleTimes.size() / executionTime;
+		debitSort = (double)sortTimes.size() / (executionTime/1000); //execution time is in miliseconds, we want seconds
+		debitCreate = (double)shuffleTimes.size() / (executionTime/1000);
 		latencyMs = shuffleTimes.stream().mapToLong(i -> i).average().getAsDouble() + sortTimes.stream().mapToLong(i -> i).average().getAsDouble();
-
+		nbActions = sortTimes.size()+shuffleTimes.size();
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("------------------------------------------------------------------").append("\n");
 		stringBuilder.append("Settings:\n");
@@ -33,9 +34,9 @@ public class CalculatorPerformance
 
 		stringBuilder.append("------------------------------------------------------------------").append("\n");
 		stringBuilder.append("Performance report:\n");
-		stringBuilder.append("Elapsed time [s]: ").append(tabs(4)).append(executionTime).append("\n");
-		stringBuilder.append("Débit Sort : ").append(tabs(1)).append(debitSort).append("\n");
-		stringBuilder.append("Débit Create : ").append(tabs(1)).append(debitCreate).append("\n");
+		stringBuilder.append("NbActions : ").append(tabs(1)).append(nbActions).append("\n");
+		stringBuilder.append("Débit Sort [a/s]: ").append(tabs(1)).append(debitSort).append("\n");
+		stringBuilder.append("Débit Create [a/s]: ").append(tabs(1)).append(debitCreate).append("\n");
 		stringBuilder.append("Latency [ms]: ").append(tabs(5)).append(latencyMs).append("\n");
 
 		return stringBuilder.toString();
@@ -49,6 +50,7 @@ public class CalculatorPerformance
 	public static ArrayList<Double> getImportantValues()
 		{
 		ArrayList<Double> values = new ArrayList<>();
+		values.add(nbActions);
 		values.add(debitSort);
 		values.add(debitCreate);
 		values.add(latencyMs);

@@ -12,18 +12,19 @@ import ch.hearc.SA.labo2.BlockingQueue.Use.UseMain;
 public class Main
 	{
 
+	//JConsole C:\Soft\java\jdk\bin\jconsole.exe
 	public static void main(String[] args)
 		{
 		ArrayList<Double> importantValues;
 		StringBuilder sb = new StringBuilder();
-		sb.append("NbProducteurs;  NbConsommateurs; Queue Size; Elapsed time [ms];Débit Sort ;Débit Create;Latency [ms]\n");
+		sb.append("NbProducteurs;  NbConsommateurs; Queue Size; Elapsed time [ms]; NbActions ; Débit Sort [a/s] ;Débit Create [a/s];Latency [ms]\n");
 
 		// Define arrays for testing values
-		int[] nbProducteursArray = { 1, 3, 6 };
-		int[] nbConsommateursArray = { 3, 9, 18 };
-		int[] queueSizeArray = { 10, 5, 3 };
-		int[] executionTimeArray = { 10000, 60000, 30000 };
-		//							 10s,	1m,    30s
+		int[] nbProducteursArray = { 1, 3 };
+		int[] nbConsommateursArray = { 3, 9 };
+		int[] queueSizeArray = { 10, 5 };
+		int[] executionTimeArray = { 10000, 20000, 30000 };
+		//							 10s,	20s,    30s
 		// Loop through all possible combinations of values
 
 		for(int nbProducteurs:nbProducteursArray)
@@ -39,7 +40,7 @@ public class Main
 						usemain.setValues(nbProducteurs, nbConsommateurs, queueSize, executionTime);
 						System.out.println("--------------------------------------------------------------------------------");
 
-						System.out.println("Settings : "+ nbProducteurs + " " +nbConsommateurs+ " " + queueSize+ " " + executionTime);
+						System.out.println("Settings : " + nbProducteurs + " " + nbConsommateurs + " " + queueSize + " " + executionTime);
 						usemain.start();
 						try
 							{
@@ -51,6 +52,7 @@ public class Main
 							e.printStackTrace();
 							}
 
+						//add them in reverse order
 						importantValues = CalculatorPerformance.getImportantValues();
 						importantValues.add(0, (double)executionTime);
 						importantValues.add(0, (double)queueSize);
@@ -60,7 +62,9 @@ public class Main
 						// Add the values to the CSV string
 						for(Double value:importantValues)
 							{
-							sb.append(value).append(";");
+							String val = value.toString();
+							val = val.replace('.',',');
+							sb.append(val).append(";");
 							}
 						sb.deleteCharAt(sb.length() - 1);
 						sb.append("\n");
@@ -73,9 +77,12 @@ public class Main
 
 	private static void writeToFile(StringBuilder sb)
 		{
+		System.out.println("--------------------------------------------------------------------------------");
+		System.out.println("Writing in a file");
+
 		try
 			{
-			File file = new File(".\\Results.csv");
+			File file = new File(".\\Results3.csv");
 			FileWriter fileWriter = new FileWriter(file);
 			fileWriter.write(sb.toString());
 			fileWriter.close();
@@ -84,5 +91,7 @@ public class Main
 			{
 			e.printStackTrace();
 			}
+		System.out.println("Writing ended, see results in Results.csv");
+
 		}
 	}
