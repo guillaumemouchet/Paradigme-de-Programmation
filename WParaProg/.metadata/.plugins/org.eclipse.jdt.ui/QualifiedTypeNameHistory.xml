@@ -33,7 +33,8 @@
     <fullyQualifiedTypeName name="ch.hearc.SA.labo2.BlockingQueue.TimePerformance"/>
     <fullyQualifiedTypeName name="ch.hearc.SA.labo2.BlockingQueue.Performance.CalculatorPerformance"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
-    <fullyQualifiedTypeName name="ch.hearc.SA.labo2.BlockingQueue.Use.UseMain"/>
     <fullyQualifiedTypeName name="java.util.Arrays"/>
     <fullyQualifiedTypeName name="java.util.regex.Matcher"/>
+    <fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
+    <fullyQualifiedTypeName name="ch.hearc.SA.labo2.BlockingQueue.Use.UseMain"/>
 </qualifiedTypeNameHistroy>

@@ -3,6 +3,7 @@ package ch.hearc.SA.labo2.BlockingQueue.Producteur_Consommateur;
 
 import java.util.Arrays;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 import ch.hearc.SA.labo2.BlockingQueue.Performance.TimePerformance;
 
@@ -35,21 +36,20 @@ public class Consumer implements Runnable
 			int[] array;
 			try
 				{
-				Thread.sleep(1000);
-				if (!queue.isEmpty())
-					{
-					long startTime = System.currentTimeMillis();
-					array = queue.take();
-					if(array.length==1) //Valeur par défaut pour débloquer
-						{
-						break; //break before adding in the time so shouln't be a problem
-						}
-					//process the message now
-					Arrays.sort(array);
-					TimePerformance.getInstance().arraySortSentTime(System.currentTimeMillis() - startTime);
+				//Thread.sleep(1000);
 
-					//trace("\t" + name + " array after process : " + Arrays.toString(array));
-					}
+					long startTime = System.currentTimeMillis();
+					array = queue.poll(2, TimeUnit.SECONDS);
+
+					if (array != null)
+						{
+						//process the message now
+						Arrays.sort(array);
+						TimePerformance.getInstance().arraySortSentTime(System.currentTimeMillis() - startTime);
+
+						//trace("\t" + name + " array after process : " + Arrays.toString(array));
+						}
+
 
 				}
 			catch (InterruptedException e)
@@ -60,13 +60,6 @@ public class Consumer implements Runnable
 
 			}
 		System.out.println("Out c");
-
-		//Certains thread ne sortent pas parfois, je comprend pas pourquoi
-		while(queue.isEmpty())
-			{
-			System.out.println("wait");
-			queue.add(new int[1]);
-			}
 		}
 
 	}

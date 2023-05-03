@@ -3,6 +3,7 @@ package ch.hearc.SA.labo2.BlockingQueue.Producteur_Consommateur;
 
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 import ch.hearc.SA.labo2.BlockingQueue.Performance.TimePerformance;
 
@@ -36,19 +37,21 @@ public class Producer implements Runnable
 
 			try
 				{
-				Thread.sleep(1000);
-				if (queue.remainingCapacity()!=0)
+				//Thread.sleep(1000);
+
+				long startTime = System.currentTimeMillis();
+
+				Random rand = new Random();
+
+				int[] array = rand.ints(1000, 1, 1000).toArray();
+
+				boolean offered = queue.offer(array, 2, TimeUnit.SECONDS);
+				if (offered)
 					{
-					long startTime = System.currentTimeMillis();
-
-					Random rand = new Random();
-
-					int[] array = rand.ints(10, 1, 100).toArray();
-
-					queue.put(array);
 					TimePerformance.getInstance().arrayCreateSentTime(System.currentTimeMillis() - startTime);
+
+					//trace("\n" + name + " creating an array : " + Arrays.toString(array) + "\n");
 					}
-				//trace("\n" + name + " creating an array : " + Arrays.toString(array) + "\n");
 				}
 			catch (InterruptedException e)
 				{

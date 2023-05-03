@@ -11,7 +11,8 @@ import java.util.ArrayList;
 public class CalculatorPerformance
 	{
 
-	private static double latencyMs; //latence
+	private static double latencyCreate; //latence
+	private static double latencySort; //latence
 	private static double debitSort; //débit
 	private static double debitCreate; //débit
 	private static double nbActions; //performance
@@ -22,8 +23,11 @@ public class CalculatorPerformance
 		ArrayList<Long> sortTimes = TimePerformance.getInstance().getArraySortTimes();
 		debitSort = (double)sortTimes.size() / (executionTime/1000); //execution time is in miliseconds, we want seconds
 		debitCreate = (double)shuffleTimes.size() / (executionTime/1000);
-		latencyMs = shuffleTimes.stream().mapToLong(i -> i).average().getAsDouble() + sortTimes.stream().mapToLong(i -> i).average().getAsDouble();
+		latencyCreate = shuffleTimes.stream().mapToLong(i -> i).average().getAsDouble();
+		latencySort = sortTimes.stream().mapToLong(i -> i).average().getAsDouble();
 		nbActions = sortTimes.size()+shuffleTimes.size();
+
+		/*
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("------------------------------------------------------------------").append("\n");
 		stringBuilder.append("Settings:\n");
@@ -39,7 +43,8 @@ public class CalculatorPerformance
 		stringBuilder.append("Débit Create [a/s]: ").append(tabs(1)).append(debitCreate).append("\n");
 		stringBuilder.append("Latency [ms]: ").append(tabs(5)).append(latencyMs).append("\n");
 
-		return stringBuilder.toString();
+		return stringBuilder.toString();*/
+		return "";
 		}
 
 	private static String tabs(int nb)
@@ -53,7 +58,9 @@ public class CalculatorPerformance
 		values.add(nbActions);
 		values.add(debitSort);
 		values.add(debitCreate);
-		values.add(latencyMs);
+		values.add(latencySort);
+		values.add(latencyCreate);
+
 		return values;
 		}
 	}

@@ -17,16 +17,15 @@ public class Main
 		{
 		ArrayList<Double> importantValues;
 		StringBuilder sb = new StringBuilder();
-		sb.append("NbProducteurs;  NbConsommateurs; Queue Size; Elapsed time [ms]; NbActions ; Débit Sort [a/s] ;Débit Create [a/s];Latency [ms]\n");
+		sb.append("NbProducteurs;  NbConsommateurs; Queue Size; Elapsed time [s]; NbActions ; Débit Sort [a/s] ;Débit Create [a/s];Latency Sort [ms]; Latency Create [ms];\n");
 
 		// Define arrays for testing values
-		int[] nbProducteursArray = { 1, 3 };
-		int[] nbConsommateursArray = { 3, 9 };
-		int[] queueSizeArray = { 10, 5 };
-		int[] executionTimeArray = { 10000, 20000, 30000 };
-		//							 10s,	20s,    30s
+		int[] nbProducteursArray = { 1, 3, 5 };
+		int[] nbConsommateursArray = { 3, 5, 9 };
+		int[] queueSizeArray = { 1, 2, 4, 8 };
+		int[] executionTimeArray = { 10000, 15000, 20000 };
+		//							 10s,	15s,    20s
 		// Loop through all possible combinations of values
-
 		for(int nbProducteurs:nbProducteursArray)
 			{
 			for(int nbConsommateurs:nbConsommateursArray)
@@ -54,7 +53,7 @@ public class Main
 
 						//add them in reverse order
 						importantValues = CalculatorPerformance.getImportantValues();
-						importantValues.add(0, (double)executionTime);
+						importantValues.add(0, (double)executionTime / 1000);
 						importantValues.add(0, (double)queueSize);
 						importantValues.add(0, (double)nbConsommateurs);
 						importantValues.add(0, (double)nbProducteurs);
@@ -63,7 +62,7 @@ public class Main
 						for(Double value:importantValues)
 							{
 							String val = value.toString();
-							val = val.replace('.',',');
+							val = val.replace('.', ',');
 							sb.append(val).append(";");
 							}
 						sb.deleteCharAt(sb.length() - 1);
@@ -82,7 +81,7 @@ public class Main
 
 		try
 			{
-			File file = new File(".\\Results3.csv");
+			File file = new File(".\\Results.csv");
 			FileWriter fileWriter = new FileWriter(file);
 			fileWriter.write(sb.toString());
 			fileWriter.close();
