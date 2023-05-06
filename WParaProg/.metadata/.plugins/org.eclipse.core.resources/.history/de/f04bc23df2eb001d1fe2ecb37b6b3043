@@ -17,7 +17,6 @@ public class CalculatorPerformance
 	private static double debitCreate; //débit
 	private static double nbActions; //performance
 
-	//Certains paramètres ne sont pas utilisés mais laissé pour mieux étendre
 	public static void createReport(@SuppressWarnings("unused") int nbProducteurs, @SuppressWarnings("unused") int nbConsommateurs,@SuppressWarnings("unused")  int queueSize, long executionTime)
 		{
 		ArrayList<Long> shuffleTimes = TimePerformance.getInstance().getArrayCreateTimes();

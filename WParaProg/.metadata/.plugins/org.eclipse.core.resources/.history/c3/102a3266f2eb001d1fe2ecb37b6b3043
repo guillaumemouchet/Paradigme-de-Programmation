@@ -47,6 +47,7 @@ public class Producer implements Runnable
 				if (offered)
 					{
 					TimePerformance.getInstance().arrayCreateSentTime(System.currentTimeMillis() - startTime);
+
 					//trace("\n" + name + " creating an array : " + Arrays.toString(array) + "\n");
 					}
 				}
@@ -57,6 +58,7 @@ public class Producer implements Runnable
 				}
 
 			}
+		System.out.println("Out p");
 		}
 
 	}

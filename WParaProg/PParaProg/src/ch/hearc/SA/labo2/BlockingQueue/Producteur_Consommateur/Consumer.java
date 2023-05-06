@@ -28,38 +28,34 @@ public class Consumer implements Runnable
 	@Override
 	public void run()
 		{
-		String name = Thread.currentThread().getName();
-		//System.out.println(name + " started");
+		//String name = Thread.currentThread().getName();
+		//trace(name + " started");
 
 		while(System.currentTimeMillis() - TimePerformance.getInstance().getStartTime() < executionTime)
 			{
 			int[] array;
 			try
 				{
-				//Thread.sleep(1000);
 
-					long startTime = System.currentTimeMillis();
-					array = queue.poll(2, TimeUnit.SECONDS);
+				long startTime = System.currentTimeMillis();
+				array = queue.poll(2, TimeUnit.SECONDS);
 
-					if (array != null)
-						{
-						//process the message now
-						Arrays.sort(array);
-						TimePerformance.getInstance().arraySortSentTime(System.currentTimeMillis() - startTime);
+				if (array != null)
+					{
+					//process the message now
+					Arrays.sort(array);
+					TimePerformance.getInstance().arraySortSentTime(System.currentTimeMillis() - startTime);
 
-						//trace("\t" + name + " array after process : " + Arrays.toString(array));
-						}
-
+					//trace("\t" + name + " array after process : " + Arrays.toString(array));
+					}
 
 				}
 			catch (InterruptedException e)
 				{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				}
 
 			}
-		System.out.println("Out c");
 		}
 
 	}

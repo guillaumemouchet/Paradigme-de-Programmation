@@ -28,14 +28,16 @@ public class Producer implements Runnable
 	@Override
 	public void run()
 		{
-		//String name = Thread.currentThread().getName();
-		//trace(name + " started");
+		String name = Thread.currentThread().getName();
+
+		//System.out.println(name + " started");
 
 		while(System.currentTimeMillis() - TimePerformance.getInstance().getStartTime() < executionTime)
 			{
 
 			try
 				{
+				//Thread.sleep(1000);
 
 				long startTime = System.currentTimeMillis();
 
@@ -47,6 +49,7 @@ public class Producer implements Runnable
 				if (offered)
 					{
 					TimePerformance.getInstance().arrayCreateSentTime(System.currentTimeMillis() - startTime);
+
 					//trace("\n" + name + " creating an array : " + Arrays.toString(array) + "\n");
 					}
 				}
@@ -57,6 +60,7 @@ public class Producer implements Runnable
 				}
 
 			}
+		System.out.println("Out p");
 		}
 
 	}

@@ -24,7 +24,7 @@ public class Main
 		int[] queueSizeArray = { 1, 2, 4, 8 };
 		int[] executionTimeArray = { 10000, 15000, 20000 };
 		//							 10s,	15s,    20s
-
+		
 		// Loop through all possible combinations of values, takes around 20 minutes
 		for(int nbProducteurs:nbProducteursArray)
 			{
@@ -62,7 +62,7 @@ public class Main
 						for(Double value:importantValues)
 							{
 							String val = value.toString();
-							val = val.replace('.', ','); //convert . to , because Excel is strange
+							val = val.replace('.', ',');
 							sb.append(val).append(";");
 							}
 						sb.deleteCharAt(sb.length() - 1);

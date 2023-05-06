@@ -62,7 +62,7 @@ public class Main
 						for(Double value:importantValues)
 							{
 							String val = value.toString();
-							val = val.replace('.', ','); //convert . to , because Excel is strange
+							val = val.replace('.', ',');
 							sb.append(val).append(";");
 							}
 						sb.deleteCharAt(sb.length() - 1);

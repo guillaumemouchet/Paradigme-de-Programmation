@@ -1,19 +1,19 @@
 
 package ch.hearc.SA.labo2.BlockingQueue.Producteur_Consommateur;
 
-import java.util.Random;
+import java.util.Arrays;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 import ch.hearc.SA.labo2.BlockingQueue.Performance.TimePerformance;
 
-public class Producer implements Runnable
+public class Consumer implements Runnable
 	{
 
 	private BlockingQueue<int[]> queue;
 	private long executionTime;
 
-	public Producer(BlockingQueue<int[]> queue, long executionTime)
+	public Consumer(BlockingQueue<int[]> queue, long executionTime)
 		{
 		this.queue = queue;
 		this.executionTime = executionTime;
@@ -28,27 +28,29 @@ public class Producer implements Runnable
 	@Override
 	public void run()
 		{
-		//String name = Thread.currentThread().getName();
-		//trace(name + " started");
+		String name = Thread.currentThread().getName();
+		//System.out.println(name + " started");
 
 		while(System.currentTimeMillis() - TimePerformance.getInstance().getStartTime() < executionTime)
 			{
-
+			int[] array;
 			try
 				{
+				//Thread.sleep(1000);
 
-				long startTime = System.currentTimeMillis();
+					long startTime = System.currentTimeMillis();
+					array = queue.poll(2, TimeUnit.SECONDS);
 
-				Random rand = new Random();
+					if (array != null)
+						{
+						//process the message now
+						Arrays.sort(array);
+						TimePerformance.getInstance().arraySortSentTime(System.currentTimeMillis() - startTime);
 
-				int[] array = rand.ints(1000, 1, 1000).toArray();
+						//trace("\t" + name + " array after process : " + Arrays.toString(array));
+						}
 
-				boolean offered = queue.offer(array, 2, TimeUnit.SECONDS);
-				if (offered)
-					{
-					TimePerformance.getInstance().arrayCreateSentTime(System.currentTimeMillis() - startTime);
-					//trace("\n" + name + " creating an array : " + Arrays.toString(array) + "\n");
-					}
+
 				}
 			catch (InterruptedException e)
 				{
@@ -57,6 +59,7 @@ public class Producer implements Runnable
 				}
 
 			}
+		System.out.println("Out c");
 		}
 
 	}
