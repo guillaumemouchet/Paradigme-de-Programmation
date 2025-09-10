@@ -1,0 +1,64 @@
+package ch.hearc;
+
+import ch.hearc.d_monitoring.PerformanceCalculator;
+import ch.hearc.z_use.UseLab;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<Double> importantValues;
+        StringBuilder sb = new StringBuilder();
+        sb.append("NBPersons; NBMessages; BufferSize; Elapsed time [ms];Throughput [msg/s];Effective throughput " +
+                "[B/s];Latency [ms]\n");
+
+        // Define arrays for testing values
+        int[] nbMessagesArray = {100, 200, 500};
+        int[] nbPersonsArray = {4000, 8000, 16000};
+        int[] bufferSizeArray = {4, 8, 16};
+
+        // Loop through all possible combinations of values
+        for (int nbMessages : nbMessagesArray) {
+            for (int nbPersons : nbPersonsArray) {
+                for (int bufferSize : bufferSizeArray) {
+
+                    UseLab.settings(nbPersons, bufferSize, nbMessages);
+                    Thread thread = new Thread(UseLab::run);
+                    thread.start();
+                    try {
+                        thread.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    importantValues = PerformanceCalculator.getImportantValues();
+                    importantValues.add(0, (double) bufferSize);
+                    importantValues.add(0, (double) nbMessages);
+                    importantValues.add(0, (double) nbPersons);
+
+                    // Add the values to the CSV string
+                    for (Double value : importantValues) {
+                        sb.append(value).append(";");
+                    }
+                    sb.deleteCharAt(sb.length() - 1);
+                    sb.append("\n");
+                }
+            }
+        }
+        writeToFile(sb);
+    }
+
+    private static void writeToFile(StringBuilder sb) {
+        try {
+            File file = new File(".\\test.csv");
+            FileWriter fileWriter = new FileWriter(file);
+            fileWriter.write(sb.toString());
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
